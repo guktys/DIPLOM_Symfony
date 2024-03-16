@@ -1,0 +1,18 @@
+.golden_epil_logo {
+    height: 84px;
+    display: block;
+    width: auto;
+}
+#main_menu {
+    display: flex;
+    align-items: center;
+}
+#header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding-left: 50px;
+    padding-right: 50px;
+}

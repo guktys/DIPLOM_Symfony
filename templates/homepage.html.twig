@@ -1,5 +1,38 @@
-<h1>oijjoijjoj</h1>
+{% extends 'base.html.twig' %}
 
-<img src="{{ asset('images/test.jpg') }}" alt="Symfony!"/>
+     {% block body %}
+         <link href="{{ asset('css/homepage.css') }}" rel="stylesheet"/>
+
+         <div class=" homepage_banner position-relative overflow-hidden p-3 p-md-5  text-center bg-body-tertiary"
+         style='background-image: url("{{ asset('images/homepage_banner.jpg') }}")'>
+             <div class="col-md-6 p-lg-5 mx-auto  banner_text">
+                 <h1 class="display-3 fw-bold text-white ">Найкращий салон</h1>
+                 <h3 class="fw-normal mb-3 text-white">Епіляції манікюру та педікюру</h3>
+                 <div class="d-flex gap-3 justify-content-center lead fw-normal">
+                     <button class="text-white banner_btn" href="#" >
+                         Написати до нас
+                     </button>
+                     <button class="text-white banner_btn" href="#">
+                         Записатися
+                     </button>
+                 </div>
+             </div>
+             <div class="product-device shadow-sm d-none d-md-block"></div>
+             <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+         </div>
+         <section class="py-3 text-center container">
+             <div class="row py-lg-5">
+                 <div class="col-lg-6 col-md-8 mx-auto">
+                     <h1 class="fw-light">Про нас </h1>
+                     <p class="lead text-body-secondary">Ваша гармонія - наша майстерність!</p>
+                     <p>
+                         Звільніть себе від стресу та повсякденних турбот у нашому салоні епіляції та манікюру! Наші досвідчені майстри створять атмосферу затишку та розслаблення, а ви насолоджуватиметесь найвищим рівнем обслуговування. Відчуйте себе красивою та доглянутою завдяки нашим послугам епіляції та професійному манікюру!
+                     </p>
+                 </div>
+             </div>
+         </section>
+
+
+     {% endblock %}
 
 
