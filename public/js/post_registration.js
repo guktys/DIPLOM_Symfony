@@ -2,8 +2,6 @@ $(document).ready(function() {
     $('form').submit(function(event) {
         event.preventDefault();
         var formData = $(this).serialize();
-        console.log(formData);
-        // Отправляем данные на сервер с помощью AJAX
         $.ajax({
             type: 'POST',
             url: $(this).attr('action'),
