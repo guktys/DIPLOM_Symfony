@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class NewsRepository extends EntityRepository
+class UserRepository extends EntityRepository
 {
 
 }

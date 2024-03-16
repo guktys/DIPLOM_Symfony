@@ -1,18 +1,12 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-parameters:
-
+# config/services.yaml
 services:
-    # default configuration for services in *this* file
+    # конфигурация для сервисов по умолчанию в *этом* файле
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true      # Автоматически внедряет зависимости в ваши сервисы.
+        autoconfigure: true # Автоматически регистрирует ваши сервисы как команды, подписчики событий и т.д.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+    # делает классы в src/ доступными для использования в качестве сервисов
+    # создает по сервису в классе, чей id является полным именем класса
     App\:
         resource: '../src/'
         exclude:
@@ -20,5 +14,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # порядок в этом файле важен, так как опреления сервисов всегда
+    # *заменяют* предыдущие; добавьте собственную конфигурацию сервиса ниже
+
+    # ...
