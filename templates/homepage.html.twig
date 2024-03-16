@@ -9,9 +9,12 @@
                  <h1 class="display-3 fw-bold text-white ">Найкращий салон</h1>
                  <h3 class="fw-normal mb-3 text-white">Епіляції манікюру та педікюру</h3>
                  <div class="d-flex gap-3 justify-content-center lead fw-normal">
-                     <button class="text-white banner_btn" href="#" >
+                     <a class="text-white banner_btn" href="{{ path('app_login') }}" >
                          Логін
-                     </button>
+                     </a>
+                     <a class="text-white banner_btn" href="{{ path('app_logout') }}" >
+                         Логаут
+                     </a>
                      <a class="text-white banner_btn" href="{{ path('register_page') }}">
                          Реэстрація
                      </a>
