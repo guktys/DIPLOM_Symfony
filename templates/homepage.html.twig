@@ -27,13 +27,100 @@
              <div class="row py-lg-5">
                  <div class="col-lg-6 col-md-8 mx-auto">
                      <h1 class="fw-light">Про нас </h1>
+                     <hr>
                      <p class="lead text-body-secondary">Ваша гармонія - наша майстерність!</p>
+                     <hr>
                      <p>
                          Звільніть себе від стресу та повсякденних турбот у нашому салоні епіляції та манікюру! Наші досвідчені майстри створять атмосферу затишку та розслаблення, а ви насолоджуватиметесь найвищим рівнем обслуговування. Відчуйте себе красивою та доглянутою завдяки нашим послугам епіляції та професійному манікюру!
                      </p>
                  </div>
              </div>
+             <div class="py-lg-5 text-center">
+                 <div class="row align-items-start">
+                     <div class="col services_col">
+                         <div class="row">
+                             <div class="col services">
+                                 <img class="services_img" src="{{ asset('images/electroepilation.jpg') }}">
+                             </div>
+                             <div class="col prices text-left d-flex flex-column justify-content-center">
+                                 <h3 class="services_title">Електроепіляція</h3>
+                                 <p>1 хвилина - 5 грн </p>
+                                 <p>1 година - 300 грн </p>
+                                 <p>2 години - 600 грн </p>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col services_col">
+                         <div class="row">
+                             <div class="col services">
+                                 <img class="services_img" src="{{ asset('images/manicur.jpg') }}">
+                             </div>
+                             <div class="col prices text-left d-flex flex-column justify-content-center">
+                                 <h3 class="services_title">Манікюр</h3>
+                                 <p>Нарощування - 400 грн </p>
+                                 <p>Манікюр - 200 грн </p>
+                                 <p>Пудра - 250 грн </p>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="row align-items-center d-flex flex-column justify-content-center">
+                     <div class="col-4 align-self-center services_col">
+                         <div class="row">
+                             <div class="col services">
+                                 <img class="services_img" src="{{ asset('images/pedicur.jpg') }}">
+                             </div>
+                             <div class="col prices text-left d-flex flex-column justify-content-center">
+                                 <h3 class="services_title">Педикюр</h3>
+                                 <p>Нарощування - 400 грн </p>
+                                 <p>Манікюр - 200 грн </p>
+                                 <p>Пудра - 250 грн </p>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <div class="row py-lg-5">
+                 <div class="col mx-auto">
+
+                     <hr>
+                     <p class="lead ">Ми використовуємо лише професійну продукцію класу люкс. Якість і довготривалий ефект наших препаратів Ви можете відчути на собі.</p>
+
+                     <div class="slider_container row">
+                     <div class="swiper-button-prev col"></div>
+                     <!-- Swiper -->
+                     <div class="swiper mySwiper ">
+                         <div class="swiper-wrapper">
+                             <div class="swiper-slide">
+                                 <img src="{{ asset('images/test_logo.png') }}" />
+                             </div>
+                             <div class="swiper-slide">
+                                 <img src="{{ asset('images/test_logo.png') }}" />
+                             </div>
+                             <div class="swiper-slide">
+                                 <img src="{{ asset('images/test_logo.png') }}" />
+                             </div>
+                             <div class="swiper-slide">
+                                 <img src="{{ asset('images/test_logo.png') }}" />
+                             </div>
+                             <div class="swiper-slide">
+                                 <img src="{{ asset('images/test_logo.png') }}" />
+                             </div>
+                             <div class="swiper-slide">
+                                 <img src="{{ asset('images/test_logo.png') }}" />
+                             </div>
+                         </div>
+
+                         <div class="swiper-pagination"></div>
+                      </div>
+                         <div class="swiper-button-next col"></div>
+                     </div>
+                     <hr>
+                 </div>
+             </div>
          </section>
+
+
 
 
      {% endblock %}
