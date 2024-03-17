@@ -3,22 +3,14 @@
      {% block body %}
          <link href="{{ asset('css/homepage.css') }}" rel="stylesheet"/>
 
-         <div class=" homepage_banner position-relative overflow-hidden p-3 p-md-5  text-center bg-body-tertiary"
-         style='background-image: url("{{ asset('images/homepage_banner.jpg') }}")'>
+         <div class=" homepage_banner position-relative overflow-hidden p-3 p-md-5  text-center ">
+         <video autoplay loop muted>
+             <source src="{{ asset('video/home_banner.mp4') }}" type="video/mp4">
+         </video>
+
              <div class="col-md-6 p-lg-5 mx-auto  banner_text">
                  <h1 class="display-3 fw-bold text-white ">Найкращий салон</h1>
                  <h3 class="fw-normal mb-3 text-white">Епіляції манікюру та педікюру</h3>
-                 <div class="d-flex gap-3 justify-content-center lead fw-normal">
-                     <a class="text-white banner_btn" href="{{ path('app_login') }}" >
-                         Логін
-                     </a>
-                     <a class="text-white banner_btn" href="{{ path('app_logout') }}" >
-                         Логаут
-                     </a>
-                     <a class="text-white banner_btn" href="{{ path('register_page') }}">
-                         Реэстрація
-                     </a>
-                 </div>
              </div>
              <div class="product-device shadow-sm d-none d-md-block"></div>
              <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
@@ -26,12 +18,15 @@
          <section class="py-3 text-center container">
              <div class="row py-lg-5">
                  <div class="col-lg-6 col-md-8 mx-auto">
-                     <h1 class="fw-light">Про нас </h1>
+                     <h1 class="fw-bolder">Про нас </h1>
                      <hr>
                      <p class="lead text-body-secondary">Ваша гармонія - наша майстерність!</p>
                      <hr>
                      <p>
-                         Звільніть себе від стресу та повсякденних турбот у нашому салоні епіляції та манікюру! Наші досвідчені майстри створять атмосферу затишку та розслаблення, а ви насолоджуватиметесь найвищим рівнем обслуговування. Відчуйте себе красивою та доглянутою завдяки нашим послугам епіляції та професійному манікюру!
+                         Звільніть себе від стресу та повсякденних турбот у нашому салоні епіляції та манікюру! Наші
+                         досвідчені майстри створять атмосферу затишку та розслаблення, а ви насолоджуватиметесь
+                         найвищим рівнем обслуговування. Відчуйте себе красивою та доглянутою завдяки нашим послугам
+                         епіляції та професійному манікюру!
                      </p>
                  </div>
              </div>
@@ -84,44 +79,69 @@
                  <div class="col mx-auto">
 
                      <hr>
-                     <p class="lead ">Ми використовуємо лише професійну продукцію класу люкс. Якість і довготривалий ефект наших препаратів Ви можете відчути на собі.</p>
+                     <p class="lead ">Ми використовуємо лише професійну продукцію класу люкс. Якість і довготривалий
+                         ефект наших препаратів Ви можете відчути на собі.</p>
 
                      <div class="slider_container row">
-                     <div class="swiper-button-prev col"></div>
-                     <!-- Swiper -->
-                     <div class="swiper mySwiper ">
-                         <div class="swiper-wrapper">
-                             <div class="swiper-slide">
-                                 <img src="{{ asset('images/test_logo.png') }}" />
+                         <div class="swiper-button-prev col"></div>
+                         <!-- Swiper -->
+                         <div class="swiper mySwiper ">
+                             <div class="swiper-wrapper">
+                                 <div class="swiper-slide">
+                                     <img src="{{ asset('images/test_logo.png') }}"/>
+                                 </div>
+                                 <div class="swiper-slide">
+                                     <img src="{{ asset('images/test_logo.png') }}"/>
+                                 </div>
+                                 <div class="swiper-slide">
+                                     <img src="{{ asset('images/test_logo.png') }}"/>
+                                 </div>
+                                 <div class="swiper-slide">
+                                     <img src="{{ asset('images/test_logo.png') }}"/>
+                                 </div>
+                                 <div class="swiper-slide">
+                                     <img src="{{ asset('images/test_logo.png') }}"/>
+                                 </div>
+                                 <div class="swiper-slide">
+                                     <img src="{{ asset('images/test_logo.png') }}"/>
+                                 </div>
                              </div>
-                             <div class="swiper-slide">
-                                 <img src="{{ asset('images/test_logo.png') }}" />
-                             </div>
-                             <div class="swiper-slide">
-                                 <img src="{{ asset('images/test_logo.png') }}" />
-                             </div>
-                             <div class="swiper-slide">
-                                 <img src="{{ asset('images/test_logo.png') }}" />
-                             </div>
-                             <div class="swiper-slide">
-                                 <img src="{{ asset('images/test_logo.png') }}" />
-                             </div>
-                             <div class="swiper-slide">
-                                 <img src="{{ asset('images/test_logo.png') }}" />
-                             </div>
-                         </div>
 
-                         <div class="swiper-pagination"></div>
-                      </div>
+                             <div class="swiper-pagination"></div>
+                         </div>
                          <div class="swiper-button-next col"></div>
                      </div>
 
                  </div>
              </div>
+             <div class="row py-lg-2 contact_container">
+                 <div class="col">
+                     <img class="kyrsu_banner" src="{{ asset('images/kyrsu.jpg') }}"/>
+                 </div>
+                 <div class="col align-items-center d-flex flex-column justify-content-center">
+                     <h3 class="fw-bolder w-100">Бажаєте освоїти нове ремесло?</h3>
+                     <div class="kyrsu_text">
+                         Запишіться на курси манікюру та станьте професіоналом у цій чудовій сфері! Наші курси нададуть
+                         вам всю необхідну базу знань та навичок для успішної кар'єри в манікюрному мистецтві.
+                         <p class="divider text-center fw-semibold">Чому варто обрати наші курси?</p>
+                         Досвідчені викладачі з глибокими знаннями в галузі манікюру.
+                         Практичні заняття з використанням найсучасніших інструментів та матеріалів.
+                         Індивідуальний підхід до кожного студента.
+                         Сертифікати про успішне завершення курсів, що підтверджують ваші навички перед роботодавцями.
+                         <br>
+                         <p class="divider"></p>
+                         Не втрачайте шанс стати експертом у своєму ділі! Запишіться на наші курси манікюру вже сьогодні
+                         та відкрийте для себе світ краси та можливостей.
+                     </div>
+                     <button class="btn kyrsu_btn">Записатися до нас</button>
+
+                 </div>
+
+             </div>
              <div class="row py-lg-5 contact_container">
                  <div class="col mx-auto">
                      <form class="contact form">
-                         <h3 class="fw-light w-100">Зв'язатися з нами</h3>
+                         <h3 class="fw-bolder w-100">Зв'язатися з нами</h3>
                          <hr>
                          <div class="form-row row">
                              <div class="col pb-3">
@@ -133,10 +153,12 @@
                          </div>
                          <div class="form-row pb-3">
                              <div class="col pb-3">
-                                 <input type="email" class="form-control" id="inputEmail4" placeholder="ваша_пошта@gmail.com">
+                                 <input type="email" class="form-control" id="inputEmail4"
+                                        placeholder="ваша_пошта@gmail.com">
                              </div>
                              <div class="col pb-3">
-                                 <textarea class="form-control" id="validationTextarea" placeholder="Ваше питання"></textarea>
+                                 <textarea class="form-control" id="validationTextarea"
+                                           placeholder="Ваше питання"></textarea>
                              </div>
                          </div>
 
@@ -144,7 +166,7 @@
                      </form>
                  </div>
                  <div class="col mx-auto contact_banner">
-                     <img class="call_us_banner" src="{{ asset('images/call_us_banner.png') }}" />
+                     <img class="call_us_banner" src="{{ asset('images/call_us_banner.png') }}"/>
                  </div>
              </div>
          </section>

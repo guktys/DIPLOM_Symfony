@@ -1,9 +1,12 @@
 .homepage_banner{
     background-size: cover;
     background-position-y: center;
-    height: 520px;
+    height: 600px;
     display: flex;
     justify-content: center;
+    overflow: hidden;
+    width: auto;
+    border-radius: 0 0 20% 20%;
 }
 .banner_text{
     margin-top: 85px;
@@ -122,6 +125,7 @@ a:hover {
 .contact_container {
     display: flex;
     justify-content: center;
+    padding-bottom: 10px;
 }
 .contact.form {
     height: 100%;
@@ -139,6 +143,7 @@ a:hover {
     background-color: #B69256;
     border-color: #B69256;
     color: white;
+    height: 50px;
 }
 .contact_btn:hover{
     background-color: #886d3f;
@@ -153,4 +158,43 @@ hr {
     width: 636px;
     margin-left: auto;
     margin-right: auto;
+}
+.kyrsu_banner {
+    height: inherit;
+    width: 85%;
+}
+.kyrsu_text {
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.kyrsu_btn{
+    background-color: #B69256;
+    border-color: #B69256;
+    color: white;
+}
+.kyrsu_btn:hover{
+    background-color: #886d3f;
+    border-color: #886d3f;
+    color: white;
+}
+.btn.kyrsu_btn {
+    height: 50px;
+    width: 175px;
+    margin-top: 20px;
+}
+.kyrsu_hr{
+    width: 636px;
+    margin-left: auto;
+    margin-right: auto;
+}
+video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1000; /* Помещаем видео под остальные элементы */
 }
