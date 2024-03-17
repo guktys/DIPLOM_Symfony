@@ -18,7 +18,7 @@
     font-size: 17px;
 }
 .banner_btn:hover{
-    background-color: #886d3f
+    background-color: #886d3f;
 }
 a {
     text-decoration: none;
@@ -114,4 +114,43 @@ a:hover {
     width: 50px;
     border-radius: 50%;
     text-align: center;
+}
+.call_us_banner{
+    width: inherit;
+    height: 100%;
+}
+.contact_container {
+    display: flex;
+    justify-content: center;
+}
+.contact.form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+.contact_banner{
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-content: center;
+}
+.contact_btn{
+    background-color: #B69256;
+    border-color: #B69256;
+    color: white;
+}
+.contact_btn:hover{
+    background-color: #886d3f;
+    border-color: #886d3f;
+    color: white;
+}
+#validationTextarea {
+    height: 145px;
+}
+
+hr {
+    width: 636px;
+    margin-left: auto;
+    margin-right: auto;
 }

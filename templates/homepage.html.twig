@@ -35,7 +35,7 @@
                      </p>
                  </div>
              </div>
-             <div class="py-lg-5 text-center">
+             <div class="py-lg-3 text-center">
                  <div class="row align-items-start">
                      <div class="col services_col">
                          <div class="row">
@@ -115,7 +115,36 @@
                       </div>
                          <div class="swiper-button-next col"></div>
                      </div>
-                     <hr>
+
+                 </div>
+             </div>
+             <div class="row py-lg-5 contact_container">
+                 <div class="col mx-auto">
+                     <form class="contact form">
+                         <h3 class="fw-light w-100">Зв'язатися з нами</h3>
+                         <hr>
+                         <div class="form-row row">
+                             <div class="col pb-3">
+                                 <input type="text" class="form-control input-name" placeholder="Ваше ім'я">
+                             </div>
+                             <div class="col pb-3">
+                                 <input type="text" class="form-control input-name" placeholder="Ваше прізвище">
+                             </div>
+                         </div>
+                         <div class="form-row pb-3">
+                             <div class="col pb-3">
+                                 <input type="email" class="form-control" id="inputEmail4" placeholder="ваша_пошта@gmail.com">
+                             </div>
+                             <div class="col pb-3">
+                                 <textarea class="form-control" id="validationTextarea" placeholder="Ваше питання"></textarea>
+                             </div>
+                         </div>
+
+                         <button type="submit" class="btn contact_btn">Надіслати</button>
+                     </form>
+                 </div>
+                 <div class="col mx-auto contact_banner">
+                     <img class="call_us_banner" src="{{ asset('images/call_us_banner.png') }}" />
                  </div>
              </div>
          </section>
