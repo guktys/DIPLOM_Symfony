@@ -11,7 +11,11 @@ class MainController extends AbstractController
     #[Route('/', name: 'home')]
     public function index()
     {
-        return $this->render('homepage.html.twig');
+        // Получаем текущего пользователя
+        $user = $this->getUser();
+        return $this->render('homepage.html.twig',[
+            'isUserLoggedIn' => $user !== null,
+        ]);
     }
 
 }

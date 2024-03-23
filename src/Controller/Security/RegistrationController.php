@@ -16,7 +16,10 @@ class RegistrationController extends AbstractController
     #[Route('/register_page', name: 'register_page')]
     public function index()
     {
-        return $this->render('register.html.twig');
+        $user = $this->getUser();
+        return $this->render('register.html.twig',[
+            'isUserLoggedIn' => $user !== null,
+        ]);
     }
     #[Route('/register', name: 'register')]
     public function register(UserPasswordHasherInterface $passwordHasher, Request $request, EntityManagerInterface $entityManager)
@@ -24,7 +27,10 @@ class RegistrationController extends AbstractController
          $user = new User();
          $user->setEmail($request->get('email'));
          $user->setFirstname($request->get('firstname'));
-         $user->setLastname(($request->get('lastname')));
+         $user->setLastname($request->get('lastname'));
+         $user->setPhone($request->get('phone'));
+         $user->setTelegramUrl('');
+         $user->setRoles((array)'ROLE_USER');
          $plaintextPassword = ($request->get('confirm_password'));
          $hashedPassword = $passwordHasher->hashPassword(
              $user,

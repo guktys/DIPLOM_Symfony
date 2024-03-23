@@ -25,6 +25,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private string $lastname;
 
+    #[ORM\Column(type: 'string')]
+    private string $phone;
+
+    #[ORM\Column(type: 'string')]
+    private string $telegram_url;
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
@@ -123,6 +128,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->lastname = $lastname;
     }
+    /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone(string $phone): void
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTelegramUrl(): string
+    {
+        return $this->telegram_url;
+    }
+
+    /**
+     * @param string $telegram_url
+     */
+    public function setTelegramUrl(string $telegram_url): void
+    {
+        $this->telegram_url = $telegram_url;
+    }
+
     /**
      * @see UserInterface
      */

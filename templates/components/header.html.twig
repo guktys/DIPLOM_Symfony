@@ -12,18 +12,22 @@
             <li class="nav-item"><a href="#" class="nav-link ">Курси</a></li>
             <li class="nav-item"><a href="#" class="nav-link ">Наші світлини</a></li>
             <li class="nav-item"><a href="#" class="nav-link ">Про нас</a></li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_login') }}">
-                    Логін
-                </a></li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_logout') }}">
-                    Логаут
-                </a></li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('register_page') }}">
-                    Реэстрація
-                </a></li>
+            {% if isUserLoggedIn %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout') }}">
+                        Логаут
+                    </a></li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_login') }}">
+                        Логін
+                    </a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('register_page') }}">
+                        Реэстрація
+                    </a></li>
+            {% endif %}
+
         </ul>
     </header>
 </div>

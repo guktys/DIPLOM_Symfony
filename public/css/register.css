@@ -1,6 +1,9 @@
 .alert.alert-success {
     margin-top: 20px;
 }
+.alert.alert-danger{
+    margin-top: 20px;
+}
 .register_banner{
     border-top-left-radius: .25rem;
     border-bottom-left-radius: .25rem;
