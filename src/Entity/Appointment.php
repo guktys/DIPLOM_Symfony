@@ -16,11 +16,13 @@ class Appointment
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'id')]
     private User $employer;
 
+
+
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'id')]
     private User $user;
 
     #[ORM\Column(type: 'string')]
-    private string $service;
+    private ?string $service = '';
 
     #[ORM\Column(name: 'create_at', type: 'datetime')]
     private \DateTime $createAt;
@@ -47,21 +49,7 @@ class Appointment
         $this->id = $id;
     }
 
-    /**
-     * @return Employees
-     */
-    public function getEmployer(): Employees
-    {
-        return $this->employer;
-    }
 
-    /**
-     * @param Employees $employer
-     */
-    public function setEmployer(Employees $employer): void
-    {
-        $this->employer = $employer;
-    }
 
     /**
      * @return User
@@ -141,5 +129,20 @@ class Appointment
     public function setStatus(string $status): void
     {
         $this->status = $status;
+    }
+    /**
+     * @return User
+     */
+    public function getEmployer(): User
+    {
+        return $this->employer;
+    }
+
+    /**
+     * @param User $employer
+     */
+    public function setEmployer(User $employer): void
+    {
+        $this->employer = $employer;
     }
 }

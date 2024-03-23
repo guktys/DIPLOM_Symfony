@@ -19,9 +19,9 @@
                                         <h3 class="mb-5 text-center">Записатися до нас:</h3>
 
                                         <div class="row w-100">
-                                            <form method="post" action="#">
+                                            <form method="post" action="{{ path('appointment_save') }}">
                                                 <div class="form-group pb-4">
-                                                    <select class="form-select" aria-label="Default select example">
+                                                    <select class="form-select" name="master" aria-label="Default select example">
                                                         <option selected>Оберіть свого майстра</option>
                                                         {% for master in masters %}
                                                         <option value="{{  master.getId }}">{{  master.getFirstname }} {{  master.getLastname }}</option>
@@ -39,6 +39,8 @@
                                                 <button class="form-control register_btn" type="submit"> Записатися
                                                 </button>
                                             </form>
+                                            <div class="alert alert-success" style="display: none" role="alert"></div>
+                                            <div class="alert alert-danger" style="display: none" role="alert"></div>
                                         </div>
 
                                         <div class="alert alert-success" style="display: none" role="alert"></div>
@@ -108,5 +110,16 @@
                     }
                 });
             }
+            {% if app.request.isXmlHttpRequest() %}
+                var response = {{ app.response.content | raw }};
+            if (response.success) {
+                $('.alert-success').css('display', 'block');
+                $('.alert-success').text('Ви успішно зареєстровані!');
+            } else {
+                $('.alert-danger').css('display', 'block');
+                $('.alert-danger').text('Помилка, спробуйте будь ласка знову пізніше!');
+            }
+            {% endif %}
+
         </script>
     {% endblock %}
