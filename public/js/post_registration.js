@@ -7,14 +7,12 @@ $(document).ready(function() {
             url: $(this).attr('action'),
             data: formData,
             success: function(response) {
-                console.log(response.message);
                 $('.alert-success').css('display', 'block');
-                $('.alert-success').text(response.message);
+                $('.alert-success').text('Ви успішно зареєстровані!');
             },
             error: function(xhr, status, error) {
-                console.log(response.message);
                 $('.alert-danger').css('display', 'block');
-                $('.alert-danger').text(response.message);
+                $('.alert-danger').text('Помилка, спробуйте будь ласка знову пізніше!');
             }
         });
     });

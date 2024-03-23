@@ -1,0 +1,27 @@
+.alert.alert-success {
+    margin-top: 20px;
+}
+.register_banner{
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+    width: inherit;
+    height: auto;
+}
+.register_btn{
+    height: 50px;
+    background-color: #B69256;
+    border-color: #B69256;
+    color: white;
+}
+.register_btn:hover{
+    background-color: #886d3f;
+    border-color: #886d3f;
+    color: white;
+}
+.card.card-registration {
+    width: 85%;
+    height: auto;
+}
+.register_input{
+    height: 50px;
+}

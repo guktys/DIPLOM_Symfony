@@ -198,3 +198,6 @@ video {
     object-fit: cover;
     z-index: -1000; /* Помещаем видео под остальные элементы */
 }
+#main_menu .nav-link {
+    color: white;
+}
