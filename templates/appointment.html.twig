@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        <link href="{{ asset('css/register.css') }}" rel="stylesheet"/>
+        <section class="register_section mt-5 pt-5">
+            <div class="container py-5 h-100">
+                <div class="row">
+                    <div class="col d-flex justify-content-center align-items-center">
+                        <div class="card card-registration my-4 d-flex ">
+                            <div class="row ">
+                                {% if isUserLoggedIn %}
+                                <div class="col">
+                                    <img src="{{ asset('images/appointment_banner.jpg') }}"
+                                         alt="Sample photo" class=" register_banner"
+                                    />
+                                </div>
+                                <div class="col d-flex justify-content-center">
+                                    <div class="register_card card-body text-black d-flex justify-content-center align-items-center flex-column">
+                                        <h3 class="mb-5 text-center">Записатися до нас:</h3>
+
+                                        <div class="row w-100">
+                                            <form method="post" action="#">
+                                                <div class="form-group pb-4">
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option selected>Оберіть свого майстра</option>
+                                                        {% for master in masters %}
+                                                        <option value="{{  master.getId }}">{{  master.getFirstname }} {{  master.getLastname }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group pb-4">
+                                                    <input class="form-control register_input" type="text" id="service"
+                                                           placeholder="Послуга" name="service" required>
+                                                </div>
+                                                <div class="form-group pb-4">
+                                                    <input class="form-control register_input" type="text" id="time"
+                                                           placeholder="Дата" name="time" required>
+                                                </div>
+                                                <button class="form-control register_btn" type="submit"> Записатися
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <div class="alert alert-success" style="display: none" role="alert"></div>
+                                        <div class="alert alert-danger" style="display: none" role="alert"></div>
+
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="col">
+                                    <img src="{{ asset('images/appointment_banner.jpg') }}"
+                                         alt="Sample photo" class=" register_banner"
+                                    />
+                                </div>
+                                <div class="col d-flex justify-content-center">
+                                    <div class="register_card card-body text-black d-flex justify-content-center align-items-center flex-column">
+                                        <h4 class=" text-center">Нажаль запис доступний лише для зареєстрованих користувачів!</h4>
+                                    <br>
+                                        <p>Ви можете увійти у свій обліковий запис:</p>
+
+                                        <a class="text-decoration-none w-100 pb-4" href="{{ path('app_login') }}">
+                                            <button class="form-control register_btn " type="submit"> Увійти
+                                            </button>
+                                        </a>
+                                        <br>
+                                        <h4 class=" text-center ">Але ви можете нам зателефонувати та записатися через звінок:</h4>
+                                        <p class="phone"><i class="fas fa-phone mr-3"></i>  +380677862332</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}

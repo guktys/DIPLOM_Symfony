@@ -4,6 +4,15 @@
 .alert.alert-danger{
     margin-top: 20px;
 }
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
 .register_banner{
     border-top-left-radius: .25rem;
     border-bottom-left-radius: .25rem;
@@ -27,4 +36,11 @@
 }
 .register_input{
     height: 50px;
+}
+.fa-phone{
+    color: #B69256;
+}
+.phone{
+    font-size: x-large;
+    color: #B69256;
 }
