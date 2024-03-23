@@ -4,44 +4,47 @@
 {# ... #}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-<style>
-    #login_form_section {
-        margin-top: 150px;
-    }
+    <link href="{{ asset('css/register.css') }}" rel="stylesheet"/>
+    <section class="register_section mt-5 pt-5">
+        <div class="container py-5 h-100">
+            <div class="row">
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="card card-registration my-4 d-flex ">
+                        <div class="row ">
+                            <div class="col">
+                                <img src="{{ asset('images/login_banner.jpg') }}"
+                                     alt="Sample photo" class=" register_banner"
+                                />
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                <div class="register_card card-body text-black d-flex justify-content-center align-items-center flex-column">
+                                    <h3 class="mb-5 text-center">З поверненням:</h3>
 
-    #login_form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .form-floating {
-        width: 50%;
-        padding-bottom: 25px;
-    }
-    .form-floating.form_input {
-        margin: auto;
-    }
-</style>
-    <section id="login_form_section" class="py-3 text-center container w-100 h-100">
-        <form id="login_form" action="{{ path('app_login') }}" method="post">
-            <h1 class="h3 mb-3 fw-normal w-100">Please sign in</h1>
+                                    <div class="row w-100">
+                                        <form method="post" action="{{ path('app_login') }}">
+                                            <div class="form-group pb-4">
+                                                <input class="form-control register_input" type="email" name="_username" id="username"  placeholder="Email"
+                                                       required>
+                                            </div>
+                                            <div class="form-group pb-4">
+                                                <input class="form-control register_input" type="password"  name="_password" id="password"
+                                                       placeholder="Пароль" required>
+                                            </div>
+                                            <button class="form-control register_btn" type="submit"> Вхід </button>
+                                        </form>
+                                    </div>
 
-            <div class="form-floating form_input">
-                <input type="email" class="form-control" name="_username" id="username" placeholder="name@example.com" value="{{ last_username }}">
-                <label for="floatingInput">Email address</label>
+                                    {% if error %}
+                                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-floating form_input">
-                <input type="password" class="form-control" name="_password" id="password" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-            </div>
-
-            {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"> #}
-            <button class="btn btn-primary w-50 mx-auto py-2" type="submit">Sign in</button>
-        </form>
+        </div>
     </section>
 
 {% endblock %}
