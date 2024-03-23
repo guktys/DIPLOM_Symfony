@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
     {% block body %}
         <link href="{{ asset('css/register.css') }}" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
         <section class="register_section mt-5 pt-5">
             <div class="container py-5 h-100">
                 <div class="row">
@@ -73,4 +74,39 @@
                 </div>
             </div>
         </section>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+        <script>
+            checkJQuery();
+
+            function checkJQuery() {
+                $('input[name="time"]').daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    timePicker: true, // Включает выбор времени
+                    timePicker24Hour: true, // Используйте 24-часовой формат времени
+                    timePickerIncrement: 5, // Интервал в минутах для выбора времени
+                    minYear: 2024,
+                    maxYear: parseInt(moment().format('YYYY'),10),
+                    startDate: moment().startOf('hour'),
+                    endDate: moment().startOf('hour').add(32, 'hour'),
+                    locale: {
+                        format: 'DD.MM.YYYY HH:mm',
+                        applyLabel: "Прийняти",
+                        cancelLabel: "Відміна",
+                        fromLabel: "Від",
+                        toLabel: "До",
+                        customRangeLabel: "Вибрати",
+                        daysOfWeek: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+                        monthNames: [
+                            "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень",
+                            "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"
+                        ],
+                        firstDay: 1
+                    }
+                });
+            }
+        </script>
     {% endblock %}
