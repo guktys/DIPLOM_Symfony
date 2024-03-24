@@ -16,9 +16,8 @@ class RegistrationController extends AbstractController
     #[Route('/register_page', name: 'register_page')]
     public function index()
     {
-        $user = $this->getUser();
+
         return $this->render('register.html.twig',[
-            'isUserLoggedIn' => $user !== null,
         ]);
     }
     #[Route('/register', name: 'register')]

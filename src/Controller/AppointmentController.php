@@ -25,10 +25,8 @@ class AppointmentController extends AbstractController
     {
 
         $masters = $this->userRepository->findByRole('ROLE_MASTER');
-        $user = $this->getUser();
         return $this->render('appointment.html.twig',[
             'masters' => $masters,
-            'isUserLoggedIn' => $user !== null,
         ]);
     }
 
@@ -36,8 +34,8 @@ class AppointmentController extends AbstractController
     public function save(Request $request, EntityManagerInterface $entityManager)
     {
 
-        $master =$this->userRepository->findOneBy(['id'=>$request->get('master')]);
-        $user = $this->userRepository->findOneBy(['id'=>$this->getUser()->getId()]);
+        $master = $this->userRepository->findOneBy(['id' => $request->get('master')]);
+        $user = $this->userRepository->findOneBy(['id' => $this->getUser()->getId()]);
         $service = $request->get('service');
         $appointment = new Appointment();
         $appointment->setEmployer($master);
@@ -49,6 +47,7 @@ class AppointmentController extends AbstractController
 
         $entityManager->persist($appointment);
         $entityManager->flush();
+
         if ($appointment->getId()) {
             return new JsonResponse(['success' => true, 'message' => 'Ви успішно записані!']);
         } else {
