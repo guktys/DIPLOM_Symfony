@@ -237,3 +237,22 @@ video {
 .master_banner .row {
     height: inherit;
 }
+@keyframes tilt {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-15deg); /* Наклон влево */
+    }
+    100% {
+        transform: rotate(15deg); /* Наклон вправо */
+    }
+}
+
+.master_banner {
+    transition: transform 0.5s; /* Плавный переход */
+}
+
+.master_banner:hover {
+    animation: tilt 1s ease-in-out infinite alternate; /* Анимация при наведении */
+}

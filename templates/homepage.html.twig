@@ -79,15 +79,15 @@
                  <div class="col mx-auto">
                      <img class="appointment_banner_img" src="{{ asset('images/homepage_banner_girl.png') }}">
                  </div>
-                 <div class="col-6 mx-auto master_banner" style=" background-image: url('{{ asset('images/homepage_banner_master_hand.png') }}');">
-                     <div class="row">
-                         <div class="col d-flex justify-content-center" >
-                             <a class=" d-flex justify-content-center" href="{{ path('appointment') }}">
-                                 <button class="btn home_btn">Записатися до нас</button>
-                             </a>
-
-                         </div>
-                     </div>
+                 <div class="col-6 mx-auto master_banner"
+                      style=" background-image: url('{{ asset('images/homepage_banner_master_hand.png') }}');">
+                         <a href="{{ path('appointment') }}" class="row" >
+                             <div class="col d-flex justify-content-center">
+                                 <div class="d-flex justify-content-center">
+                                     <button class="btn home_btn">Записатися до нас</button>
+                                 </div>
+                             </div>
+                         </a>
                  </div>
                  <div class="col mx-auto">
                      <img class="appointment_banner_img_foot" src="{{ asset('images/homepage_banner_foot.png') }}">
