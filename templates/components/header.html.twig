@@ -28,6 +28,18 @@
                     </a></li>
             {% endif %}
 
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MASTER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('master_cabinet') }}">
+                        Кабінет мастера
+                    </a></li>
+            {% elseif is_granted('ROLE_USER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('user_cabinet') }}">
+                       Кабінет користувача
+                    </a></li>
+            {% endif %}
+
         </ul>
     </header>
 </div>

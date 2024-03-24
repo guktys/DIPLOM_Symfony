@@ -10,6 +10,7 @@ window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY;
 
     if (scrollPosition > 10) {
+        element.style.position = 'fixed'
         element.style.backgroundColor = '#fff';
         element.style.height = '110px';
         element.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
@@ -18,6 +19,7 @@ window.addEventListener('scroll', () => {
             item.style.color = '#B69256';
         });
     } else {
+        element.style.position = 'relative'
         element.style.boxShadow = 'none';
         element.style.backgroundColor = 'rgba(255,255,255,0)';
 

@@ -256,3 +256,6 @@ video {
 .master_banner:hover {
     animation: tilt 1s ease-in-out infinite alternate; /* Анимация при наведении */
 }
+#header{
+  position: fixed!important;
+}
