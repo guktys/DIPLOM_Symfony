@@ -168,19 +168,19 @@ hr {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.kyrsu_btn{
+.home_btn{
     background-color: #B69256;
     border-color: #B69256;
     color: white;
 }
-.kyrsu_btn:hover{
+.home_btn:hover{
     background-color: #886d3f;
     border-color: #886d3f;
     color: white;
 }
-.btn.kyrsu_btn {
+.btn.home_btn {
     height: 50px;
-    width: 175px;
+    width: 240px;
     margin-top: 20px;
 }
 .kyrsu_hr{
@@ -200,4 +200,40 @@ video {
 }
 #main_menu .nav-link {
     color: white;
+}
+.appointment_banner{
+    background-color: #B69256;
+    overflow: hidden;
+    height: 221px;
+}
+.appointment_banner .btn.home_btn {
+    color: #B69256;
+    height: inherit;
+    background-color: #ffebcd00;
+    border: none;
+    margin-top: -6px;
+    text-align: center;
+}
+.appointment_banner_img {
+    height: auto;
+    width: 53%;
+}
+.appointment_banner_img_foot{
+    width: 44%;
+    margin-top: -26px;
+}
+.appointment_banner_master_hand{
+    height: auto;
+    width: 45%;
+}
+.master_banner {
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-size: 95%;
+    background-position-y: -37px;
+    height: inherit;
+
+}
+.master_banner .row {
+    height: inherit;
 }

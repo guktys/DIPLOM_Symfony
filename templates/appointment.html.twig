@@ -8,7 +8,7 @@
                     <div class="col d-flex justify-content-center align-items-center">
                         <div class="card card-registration my-4 d-flex ">
                             <div class="row ">
-                                {% if isUserLoggedIn %}
+                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                 <div class="col">
                                     <img src="{{ asset('images/appointment_banner.jpg') }}"
                                          alt="Sample photo" class=" register_banner"
