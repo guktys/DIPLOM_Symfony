@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\AppointmentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,27 +50,27 @@ class UserCabinetController extends AbstractController
     }
 
     #[Route('/user_save_logo', name: 'user_save_logo')]
-    public function userSaveLogo(Request $request)
+    public function userSaveLogo(Request $request, EntityManagerInterface $em): JsonResponse
     {
         $file = $request->files->get('file');
-        $publicDirectory = $this->kernel->getProjectDir() . '/public';
+        $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/images/user-photo/';
         $user = $this->getUser();
-        if ($file instanceof UploadedFile) {
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
-            try {
-                $file->move(
-                    $publicDirectory . '/images/user-photo/',
-                    $fileName
-                );
-                $user->setLogo($fileName);
-                $this->em->persist($user);
-                $this->em->flush($user);
-            } catch (FileException $e) {
-                return new Response('Ошибка при перемещении файла');
-            }
-            return new Response('Файл успешно загружен');
+        if (!$file instanceof UploadedFile) {
+            return $this->json(['status' => 'error', 'message' => 'No file uploaded.'], Response::HTTP_BAD_REQUEST);
         }
-        return new Response('Файл не был загружен');
+
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+        try {
+            $file->move($publicDirectory, $fileName);
+            $user->setLogo($fileName);
+            $em->persist($user);
+            $em->flush();
+
+            return $this->json(['status' => 'success', 'fileName' => $fileName]);
+        } catch (FileException $e) {
+            return $this->json(['status' => 'error', 'message' => 'File upload failed.'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
