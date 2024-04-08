@@ -1,0 +1,24 @@
+.user-logo {
+    width: 205px;
+    height: 205px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    margin: auto;
+    border: 1px solid #B69256;
+}
+.user-tab {
+    color: #B69256;
+}
+.btn{
+    background-color: #B69256;
+    border-color: #B69256;
+    color: white;
+    height: 40px;
+    width: 200px;
+}
+.btn:hover{
+    background-color: #886d3f;
+    border-color: #886d3f;
+    color: white;
+}

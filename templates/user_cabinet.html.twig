@@ -1,20 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <style>
-        .user-logo {
-            width: 205px;
-            height: 205px;
-            background-position: center;
-            background-size: cover;
-            border-radius: 50%;
-            margin: auto;
-            border: 1px solid #B69256;
-        }
-        .user-tab {
-            color: #B69256;
-        }
-    </style>
+    <link href="{{ asset('css/user_cabinet.css') }}" rel="stylesheet"/>
     <section class="py-3 text-center container">
 
         <div class="row py-lg-5">
@@ -34,24 +21,27 @@
             <div class="col col-md-8 mx-auto">
                 <ul class="nav nav-tabs" id="myTabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="user-tab nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1"
+                        <button class="user-tab nav-link active" id="tab1-tab" data-bs-toggle="tab"
+                                data-bs-target="#tab1"
                                 type="button" role="tab" aria-controls="tab1" aria-selected="true">Ваші записи
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="user-tab nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button"
+                        <button class="user-tab nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2"
+                                type="button"
                                 role="tab" aria-controls="tab2" aria-selected="false">Налаштування
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="user-tab nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button"
+                        <button class="user-tab nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3"
+                                type="button"
                                 role="tab" aria-controls="tab3" aria-selected="false">Tab 3
                         </button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabsContent">
                     <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-                        <h3>Ваші записи:</h3>
+                        <h3 class="mt-4">Ваші записи:</h3>
                         <table class="table">
                             <thead>
                             <tr>
@@ -75,11 +65,23 @@
 
                     </div>
                     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#changeLogoModal">
-                            Змінити лого
-                        </button>
+                        <h3 class="mt-4">Налаштування:</h3>
+                        <div class="row settings-row">
+                            <div class="col">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#changeLogoModal">
+                                    Змінити лого
+                                </button>
+                            </div>
+                            <div class="col">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#changePassModal">
+                                    Змінити пароль
+                                </button>
+                            </div>
+                        </div>
 
                         <!-- Modal -->
                         <div class="modal fade" id="changeLogoModal" tabindex="-1"
@@ -95,8 +97,9 @@
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label">Введіть нове зображення</label>
                                             <input class="form-control" type="file" id="formFile">
-                                            <div id="alert-success" class="alert alert-success" role="alert" style="display: none">
-                                               Лого успішно збережено!
+                                            <div id="alert-success" class="alert alert-success" role="alert"
+                                                 style="display: none">
+                                                Лого успішно збережено!
                                             </div>
                                         </div>
                                     </div>
@@ -109,6 +112,45 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="changePassModal" tabindex="-1"
+                             aria-labelledby="changePassModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="changePassModalLabel">Змінити пароль</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <input type="password" class="form-control" id="oldPass"
+                                                   placeholder="Введіть старий пароль">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="password" class="form-control" id="newPass"
+                                                   placeholder="Введіть новий пароль">
+                                        </div>
+                                        <div id="alert-pass-success" class="alert alert-success" role="alert"
+                                             style="display: none">
+                                            Новий пароль успішно збережено!
+                                        </div>
+                                        <div id="alert-pass-danger" class="alert alert-danger" role="alert"
+                                             style="display: none">
+                                            Неправильно введенний старий пароль!
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                            Закрити
+                                        </button>
+                                        <button type="button" id="save-pass" class="btn btn-primary">Зберегти</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
                         3
@@ -117,40 +159,5 @@
             </div>
         </div>
     </section>
-    <script>
-        document.getElementById('save-logo').addEventListener('click', function () {
-            // Получаем файл из input
-            var fileInput = document.getElementById('formFile');
-            var file = fileInput.files[0];
-
-            // Создаем объект FormData и добавляем файл в него
-            var formData = new FormData();
-            formData.append('file', file);
-
-            // Отправляем запрос на сервер
-            fetch('/user_save_logo', {
-                method: 'POST',
-                body: formData
-            })
-                .then(data => {
-                    if (data.status === 'error') {
-
-                    }else {
-                        document.getElementById('alert-success').style.display = 'block';
-                        setTimeout(function() {
-                            document.getElementById('changeLogoModal').classList.remove('show');
-                            document.getElementById('changeLogoModal').style.display = 'none';
-                            document.querySelector('.modal-backdrop').classList.remove('show');
-                            document.querySelector('.modal-backdrop').style.display = 'none';
-                        }, 500);
-                        location.reload();
-                    }
-                    console.log('Файл успешно отправлен на сервер', data);
-                })
-                .catch(error => {
-                    // Обработка ошибок
-                    console.error('There was a problem with your fetch operation:', error);
-                });
-        });
-    </script>
+    <script src="{{ asset('js/user_cabinet.js') }}"></script>
 {% endblock %}
