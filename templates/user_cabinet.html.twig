@@ -35,7 +35,13 @@
                     <li class="nav-item" role="presentation">
                         <button class="user-tab nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3"
                                 type="button"
-                                role="tab" aria-controls="tab3" aria-selected="false">Tab 3
+                                role="tab" aria-controls="tab3" aria-selected="false">Ваші дані
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="user-tab nav-link" id="tab4-tab" data-bs-toggle="tab" data-bs-target="#tab4"
+                                type="button"
+                                role="tab" aria-controls="tab4" aria-selected="false">Ваші курси
                         </button>
                     </li>
                 </ul>
@@ -153,7 +159,16 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-                        3
+                        <h3 class="mt-4">Ваші дані:</h3>
+                        <div class="row mt-2 text-start">
+                            <p>Ваша пошта: {{ user.getEmail }}</p>
+                            <p>Ваш ПІБ: {{ user.getFirstname }} {{ user.getLastname }}</p>
+                            <p>Ваш телефон: {{ user.getPhone }}</p>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+                        <h3 class="mt-4">Ваші курси:</h3>
                     </div>
                 </div>
             </div>

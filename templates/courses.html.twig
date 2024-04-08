@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        <style>
+            .courses-banner {
+                background-image: url("{{ asset('images/course_banner.png') }}");
+                background-size: 33%;
+                background-repeat: no-repeat;
+                background-position-x: right;
+                background-position-y: 2%;
+            }
+
+            .courses-banner-btn {
+                background-color: #B69256;
+                border-color: #B69256;
+                color: white;
+                height: 40px;
+                width: 200px;
+            }
+
+            .courses-banner-btn:hover {
+                background-color: #886d3f;
+                border-color: #886d3f;
+                color: white;
+            }
+            .electro_img{
+                background-image: url("{{ asset('images/course_electro.jpg') }}");
+                background-size: 87%;
+                background-repeat: no-repeat;
+                background-position-y: 35%;
+                background-position-x: center;
+                height: 300px;
+            }
+        </style>
+        <div class="courses-banner position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
+            <div class="col-md-5 p-lg-5 my-5">
+                <h1 class="display-3 fw-bold">Бажаєш класні навички?</h1>
+                <h3 class="fw-normal text-muted mb-3">В чому проблема? Записуйся до нас на курси вже сьогодні!</h3>
+                <button class="courses-banner-btn btn">Записатися</button>
+            </div>
+            <div class="product-device shadow-sm d-none d-md-block"></div>
+            <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+        </div>
+        <section class="py-3 text-center container">
+            <div class="row mt-3">
+                <div class="col-6 electro_img"></div>
+                <div class="col prices text-left d-flex flex-column justify-content-center">
+                    <h3>Курси Електроепіляція</h3>
+                    <p>1 хвилина - 5 грн </p>
+                    <p>1 година - 300 грн </p>
+                    <p>2 години - 600 грн </p>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
