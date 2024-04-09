@@ -3,10 +3,9 @@
         <style>
             .courses-banner {
                 background-image: url("{{ asset('images/course_banner.png') }}");
-                background-size: 33%;
+                background-size: 73%;
                 background-repeat: no-repeat;
                 background-position-x: right;
-                background-position-y: 2%;
             }
 
             .courses-banner-btn {
@@ -22,7 +21,8 @@
                 border-color: #886d3f;
                 color: white;
             }
-            .electro_img{
+
+            .electro_img {
                 background-image: url("{{ asset('images/course_electro.jpg') }}");
                 background-size: 87%;
                 background-repeat: no-repeat;
@@ -30,9 +30,67 @@
                 background-position-x: center;
                 height: 300px;
             }
+
+            .box {
+                background-color: transparent;
+                width: 334px;
+                height: 300px;
+                perspective: 1000px;
+            }
+
+            .box-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.5s;
+                transform-style: preserve-3d;
+            }
+
+            .electro-block:hover .box-inner {
+                transform: rotateY(180deg);
+            }
+
+            .nail-block:hover .box-inner {
+                transform: rotateY(180deg);
+            }
+
+            .box-front, .box-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+            }
+
+            .box-front {
+                background-color: #B69256;
+                color: #111111;
+                background-size: cover;
+                background-repeat: no-repeat;
+                border-radius: 0 10px 10px 0px;
+            }
+
+            .electro .box-front {
+                border-radius: 10px 0 0 10px;
+            }
+
+            .electro .box-back {
+                border-radius: 10px 0 0 10px;
+            }
+
+            .box-back {
+                background-color: #B69256;
+                color: #eeeeee;
+                transform: rotateY(180deg);
+                border-radius: 0 10px 10px 0px;
+            }
+
+            .kurs-img {
+                padding: 0px;
+            }
         </style>
         <div class="courses-banner position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
-            <div class="col-md-5 p-lg-5 my-5">
+            <div class="col-md-5 p-lg-3 my-5">
                 <h1 class="display-3 fw-bold">Бажаєш класні навички?</h1>
                 <h3 class="fw-normal text-muted mb-3">В чому проблема? Записуйся до нас на курси вже сьогодні!</h3>
                 <button class="courses-banner-btn btn">Записатися</button>
@@ -41,13 +99,53 @@
             <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
         </div>
         <section class="py-3 text-center container">
-            <div class="row mt-3">
-                <div class="col-6 electro_img"></div>
-                <div class="col prices text-left d-flex flex-column justify-content-center">
-                    <h3>Курси Електроепіляція</h3>
-                    <p>1 хвилина - 5 грн </p>
-                    <p>1 година - 300 грн </p>
-                    <p>2 години - 600 грн </p>
+            <div class="row mt-3  d-flex justify-content-center nail-block">
+                <div class="col-6 bg-body-tertiary kurs-text">
+                    <h2>Курси манікюру</h2>
+                    <p class="text-start">Ви мрієте про кар'єру у сфері краси та догляду за нігтями? Хочете володіти
+                        професійними навичками
+                        манікюру, щоб стати справжнім експертом у цій сфері?
+                        Приєднуйтеся до наших курсів манікюру, де ви зможете отримати всю необхідну освіту та практичний
+                        досвід для
+                        досягнення успіху в цій галузі. Наші кваліфіковані і досвідчені інструктори проведуть вас крізь
+                        усі аспекти манікюру - від базових технік до найновітніших тенденцій у світі моди.</p>
+                </div>
+                <div class="col-3 kurs-img nail">
+                    <div class="box">
+                        <div class="box-inner">
+                            <div class="box-front"
+                                 style='background-image: url("{{ asset('images/course_manicur.jpg') }}")'>
+                            </div>
+                            <div class="box-back">
+                                <h2>Back Side</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3  d-flex justify-content-center electro-block">
+                <div class="col-3 kurs-img electro">
+                    <div class="box">
+                        <div class="box-inner">
+                            <div class="box-front"
+                                 style='background-image: url("{{ asset('images/course_electro.jpg') }}")'>
+                            </div>
+                            <div class="box-back">
+                                <h2>Back Side</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 bg-body-tertiary kurs-text">
+                    <h2>Курси електро епіляції</h2>
+                    <p class="text-end">Хочете відкрити для себе захоплюючу та перспективну галузь краси? Запрошуємо вас
+                        на наші курси електроепіляції!
+
+                        Електроепіляція - це не лише ефективний спосіб видалення непотрібного волосся, але й професійна
+                        навичка, яка може відкрити перед вами широкі можливості у красивій індустрії. Наші кваліфіковані
+                        інструктори допоможуть вам освоїти всі техніки електроепіляції, розкриють секрети безпечного та
+                        ефективного видалення волосся, а також поділяться найновішими тенденціями та методиками у цій
+                        галузі.</p>
                 </div>
             </div>
         </section>
