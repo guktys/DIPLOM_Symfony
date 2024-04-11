@@ -33,8 +33,8 @@
 
             .box {
                 background-color: transparent;
-                width: 334px;
-                height: 300px;
+                width: 100%;
+                height: 200px;
                 perspective: 1000px;
             }
 
@@ -43,16 +43,6 @@
                 width: 100%;
                 height: 100%;
                 text-align: center;
-                transition: transform 0.5s;
-                transform-style: preserve-3d;
-            }
-
-            .electro-block:hover .box-inner {
-                transform: rotateY(180deg);
-            }
-
-            .nail-block:hover .box-inner {
-                transform: rotateY(180deg);
             }
 
             .box-front, .box-back {
@@ -63,30 +53,86 @@
             }
 
             .box-front {
-                background-color: #B69256;
+
                 color: #111111;
                 background-size: cover;
                 background-repeat: no-repeat;
-                border-radius: 0 10px 10px 0px;
-            }
-
-            .electro .box-front {
-                border-radius: 10px 0 0 10px;
-            }
-
-            .electro .box-back {
-                border-radius: 10px 0 0 10px;
             }
 
             .box-back {
                 background-color: #B69256;
                 color: #eeeeee;
-                transform: rotateY(180deg);
-                border-radius: 0 10px 10px 0px;
             }
 
             .kurs-img {
                 padding: 0px;
+            }
+
+            .nail-block.kurs-text {
+                width: 100%;
+                position: relative;
+                left: 0px;
+                padding: 0px;
+                margin: auto;
+                border-radius: 0px;
+            }
+
+            .electro-block.kurs-text {
+                width: 100%;
+                position: relative;
+                left: 0px;
+                padding: 0px;
+                margin: auto;
+                border-radius: 0px;
+            }
+
+            .box-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                cursor: pointer; /* Добавим указатель, чтобы пользователь знал, что это интерактивный элемент */
+                transition: transform 0.5s;
+                transform-style: preserve-3d;
+            }
+
+            .box-front, .box-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                transition: opacity 0.5s ease-in-out; /* Плавное изменение прозрачности */
+            }
+
+            .box-front {
+                opacity: 1; /* Полностью непрозрачный по умолчанию */
+            }
+
+            .box-back {
+                opacity: 0; /* Полностью прозрачный по умолчанию */
+            }
+
+            .box-inner:hover .box-front {
+                opacity: 0; /* Сделать передний блок полностью прозрачным при наведении */
+            }
+
+            .box-inner:hover .box-back {
+                opacity: 1; /* Сделать задний блок полностью непрозрачным при наведении */
+            }
+
+            .col.kurs-img.nail {
+                border: 1px solid #B69256;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .box-front.kurs-nail-front {
+                align-items: center;
+            }
+
+            .nail .box-back {
+                align-items: center;
+                background-color: transparent;
+                color: #000000;
             }
         </style>
         <div class="courses-banner position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
@@ -99,54 +145,71 @@
             <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
         </div>
         <section class="py-3 text-center container">
-            <div class="row mt-3  d-flex justify-content-center nail-block">
-                <div class="col-6 bg-body-tertiary kurs-text">
-                    <h2>Курси манікюру</h2>
-                    <p class="text-start">Ви мрієте про кар'єру у сфері краси та догляду за нігтями? Хочете володіти
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-bolder">Курси манікюру</h1>
+                    <hr>
+                    <p class="text-center">
+                        Ви мрієте про кар'єру у сфері краси та догляду за нігтями? Хочете володіти
                         професійними навичками
                         манікюру, щоб стати справжнім експертом у цій сфері?
                         Приєднуйтеся до наших курсів манікюру, де ви зможете отримати всю необхідну освіту та практичний
                         досвід для
                         досягнення успіху в цій галузі. Наші кваліфіковані і досвідчені інструктори проведуть вас крізь
-                        усі аспекти манікюру - від базових технік до найновітніших тенденцій у світі моди.</p>
+                        усі аспекти манікюру - від базових технік до найновітніших тенденцій у світі моди.
+                    </p>
                 </div>
-                <div class="col-3 kurs-img nail">
+            </div>
+            <div class="row mt-3  d-flex justify-content-center nail-block kurs-text">
+                <div class="col kurs-img nail">
                     <div class="box">
                         <div class="box-inner">
-                            <div class="box-front"
-                                 style='background-image: url("{{ asset('images/course_manicur.jpg') }}")'>
+                            <div class="box-front kurs-nail-front  d-flex justify-content-center"
+                                 style='background-size: 49%; background-position-y: -29px; background-image: url("{{ asset('images/epil-course.png') }}")'>
+                                <h2 class="text-center">Бажаєте приєднатися до курсу манікюру?</h2>
                             </div>
-                            <div class="box-back">
-                                <h2>Back Side</h2>
+                            <div class="box-back d-flex justify-content-center"
+                                 style='background-image: url("{{ asset('images/confetti-32.gif') }}")'>
+                                <h2 class="text-center">Так бажаю!</h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-3  d-flex justify-content-center electro-block">
-                <div class="col-3 kurs-img electro">
-                    <div class="box">
-                        <div class="box-inner">
-                            <div class="box-front"
-                                 style='background-image: url("{{ asset('images/course_electro.jpg') }}")'>
-                            </div>
-                            <div class="box-back">
-                                <h2>Back Side</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 bg-body-tertiary kurs-text">
-                    <h2>Курси електро епіляції</h2>
-                    <p class="text-end">Хочете відкрити для себе захоплюючу та перспективну галузь краси? Запрошуємо вас
+
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-bolder">Курси епіляції</h1>
+                    <hr>
+                    <p class="text-center">
+                        Хочете відкрити для себе захоплюючу та перспективну галузь краси? Запрошуємо вас
                         на наші курси електроепіляції!
 
                         Електроепіляція - це не лише ефективний спосіб видалення непотрібного волосся, але й професійна
                         навичка, яка може відкрити перед вами широкі можливості у красивій індустрії. Наші кваліфіковані
                         інструктори допоможуть вам освоїти всі техніки електроепіляції, розкриють секрети безпечного та
                         ефективного видалення волосся, а також поділяться найновішими тенденціями та методиками у цій
-                        галузі.</p>
+                        галузі.
+                    </p>
                 </div>
             </div>
+            <div class="row mt-3  d-flex justify-content-center nail-block kurs-text">
+                <div class="col kurs-img nail">
+                    <div class="box">
+                        <div class="box-inner">
+                            <div class="box-front kurs-nail-front  d-flex justify-content-center"
+                                 style='background-size: 39%; background-position-y: -29px; background-image: url("{{ asset('images/manik-curse.png') }}")'>
+                                <h2 class="text-center">Бажаєте приєднатися до курсу епіляції?</h2>
+                            </div>
+                            <div class="box-back d-flex justify-content-center"
+                                 style='background-image: url("{{ asset('images/confetti-32.gif') }}")'>
+                                <h2 class="text-center">Так бажаю!</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </section>
     {% endblock %}
