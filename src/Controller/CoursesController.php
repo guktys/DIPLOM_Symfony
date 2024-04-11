@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class Courses extends AbstractController
+class CoursesController extends AbstractController
 {
     #[Route('/courses', name: 'courses')]
     public function courses()
