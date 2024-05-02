@@ -18,3 +18,7 @@ services:
     # *заменяют* предыдущие; добавьте собственную конфигурацию сервиса ниже
 
     # ...
+    admin.category:
+        class: App\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\User, manager_type: orm, label: User }

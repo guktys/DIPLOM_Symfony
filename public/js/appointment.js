@@ -36,7 +36,9 @@ function checkJQuery() {
             success: function(response) {
                 $('.alert-success').css('display', 'block');
                 $('.alert-success').text('Ви успішно зареєстровані!');
-                window.history.back();
+                setTimeout(function () {
+                    window.history.back();
+                }, 1000);
             },
             error: function(xhr, status, error) {
                 $('.alert-danger').css('display', 'block');

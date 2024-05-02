@@ -6,7 +6,7 @@
             <div class="col-md-5 p-lg-3 my-5">
                 <h1 class="display-3 fw-bold">Бажаєш класні навички?</h1>
                 <h3 class="fw-normal text-muted mb-3">В чому проблема? Записуйся до нас на курси вже сьогодні!</h3>
-                <button class="courses-banner-btn btn">Записатися</button>
+                <a href="{{ path('courses_appointment') }}"><button class="courses-banner-btn btn">Записатися</button></a>
             </div>
             <div class="product-device shadow-sm d-none d-md-block"></div>
             <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
@@ -29,18 +29,20 @@
             </div>
             <div class="row mt-3  d-flex justify-content-center nail-block kurs-text">
                 <div class="col kurs-img nail">
-                    <div class="box">
-                        <div class="box-inner">
-                            <div class="box-front kurs-nail-front  d-flex justify-content-center"
-                                 style='background-size: 49%; background-position-y: -29px; background-image: url("{{ asset('images/epil-course.png') }}")'>
-                                <h2 class="text-center">Бажаєте приєднатися до курсу манікюру?</h2>
-                            </div>
-                            <div class="box-back d-flex justify-content-center"
-                                 style='background-image: url("{{ asset('images/confetti-32.gif') }}")'>
-                                <h2 class="text-center">Так бажаю!</h2>
+                    <a href="{{ path('courses_appointment') }}">
+                        <div class="box">
+                            <div class="box-inner">
+                                <div class="box-front kurs-nail-front  d-flex justify-content-center"
+                                     style='background-size: 49%; background-position-y: -29px; background-image: url("{{ asset('images/epil-course.png') }}")'>
+                                    <h2 class="text-center">Бажаєте приєднатися до курсу манікюру?</h2>
+                                </div>
+                                <div class="box-back d-flex justify-content-center"
+                                     style='background-image: url("{{ asset('images/confetti-32.gif') }}")'>
+                                    <h2 class="text-center">Так бажаю!</h2>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -62,18 +64,20 @@
             </div>
             <div class="row mt-3  d-flex justify-content-center nail-block kurs-text">
                 <div class="col kurs-img nail">
-                    <div class="box">
-                        <div class="box-inner">
-                            <div class="box-front kurs-nail-front  d-flex justify-content-center"
-                                 style='background-size: 39%; background-position-y: -29px; background-image: url("{{ asset('images/manik-curse.png') }}")'>
-                                <h2 class="text-center">Бажаєте приєднатися до курсу епіляції?</h2>
-                            </div>
-                            <div class="box-back d-flex justify-content-center"
-                                 style='background-image: url("{{ asset('images/confetti-32.gif') }}")'>
-                                <h2 class="text-center">Так бажаю!</h2>
+                    <a href="{{ path('courses_appointment') }}">
+                        <div class="box">
+                            <div class="box-inner">
+                                <div class="box-front kurs-nail-front  d-flex justify-content-center"
+                                     style='background-size: 39%; background-position-y: -29px; background-image: url("{{ asset('images/manik-curse.png') }}")'>
+                                    <h2 class="text-center">Бажаєте приєднатися до курсу епіляції?</h2>
+                                </div>
+                                <div class="box-back d-flex justify-content-center"
+                                     style='background-image: url("{{ asset('images/confetti-32.gif') }}")'>
+                                    <h2 class="text-center">Так бажаю!</h2>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>

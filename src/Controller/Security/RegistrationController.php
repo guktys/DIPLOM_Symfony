@@ -21,7 +21,8 @@ class RegistrationController extends AbstractController
         ]);
     }
     #[Route('/register', name: 'register')]
-    public function register(UserPasswordHasherInterface $passwordHasher, Request $request, EntityManagerInterface $entityManager)
+    public function register(UserPasswordHasherInterface $passwordHasher,
+                             Request $request, EntityManagerInterface $entityManager)
     {
          $user = new User();
          $user->setEmail($request->get('email'));
@@ -30,6 +31,7 @@ class RegistrationController extends AbstractController
          $user->setPhone($request->get('phone'));
          $user->setTelegramUrl('');
          $user->setRoles((array)'ROLE_USER');
+         $user->setLogo('logo.png');
          $plaintextPassword = ($request->get('confirm_password'));
          $hashedPassword = $passwordHasher->hashPassword(
              $user,

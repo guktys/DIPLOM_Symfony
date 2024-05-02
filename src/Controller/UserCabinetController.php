@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\AppointmentRepository;
+use App\Repository\CoursesStudentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,13 +21,15 @@ class UserCabinetController extends AbstractController
     private AppointmentRepository $appointmentRepository;
     private $kernel;
     private $em;
+    private $coursesStudentRepository;
 
-    public function __construct(UserRepository $userRepository, AppointmentRepository $appointmentRepository, KernelInterface $kernel, EntityManagerInterface $em)
+    public function __construct(UserRepository $userRepository, AppointmentRepository $appointmentRepository, KernelInterface $kernel, EntityManagerInterface $em, CoursesStudentRepository $coursesStudentRepository)
     {
         $this->userRepository = $userRepository;
         $this->appointmentRepository = $appointmentRepository;
         $this->kernel = $kernel;
         $this->em = $em;
+        $this->coursesStudentRepository = $coursesStudentRepository;
     }
 
     #[Route('/master_cabinet', name: 'master_cabinet')]
@@ -41,11 +44,17 @@ class UserCabinetController extends AbstractController
     #[Route('/user_cabinet', name: 'user_cabinet')]
     public function userСabinet()
     {
+        $courses =[];
         $user = $this->getUser();
         $userAppointments = $this->appointmentRepository->findBy(['user' => $this->getUser()]);
+        $coursesStudent = $this->coursesStudentRepository->findBy(['user' => $this->getUser()]);
+        foreach ($coursesStudent as $courseStudent) {
+            $courses[] = $courseStudent->getKourse();
+        }
         return $this->render('user_cabinet.html.twig', [
             'user' => $user,
             'userAppointments' => $userAppointments,
+            'courses' => $courses,
         ]);
     }
 

@@ -169,6 +169,28 @@
                     </div>
                     <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
                         <h3 class="mt-4">Ваші курси:</h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Назва</th>
+                                <th scope="col">Початок</th>
+                                <th scope="col">Кінець</th>
+                                <th scope="col">Статус</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for course in courses %}
+                                <tr>
+                                    <th>{{ course.getId }}</th>
+                                    <td>{{ course.getKourseName }}</td>
+                                    <td>{{ course.getStartTime|date('Y-m-d H:i:s') }}</td>
+                                    <th>{{ course.getEndTime|date('Y-m-d H:i:s') }}</th>
+                                    <td>{{ course.getStatus }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
