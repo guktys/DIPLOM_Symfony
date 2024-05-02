@@ -30,9 +30,46 @@
 
                                                         </select>
                                                     </div>
-                                                    <div class="form-group pb-4">
-                                                     
-                                                    </div>
+                                                    {% for coursesInfo in coursesInfos %}
+                                                        {% set instructor = coursesInfo[0].getInstructor %}
+                                                        {% set course = coursesInfo[0].getCourses %}
+                                                        <div class="form-group pb-4 course_block" id="course_block_{{ course.getId }}"
+                                                             style="display: none">
+                                                            <h4>{{ course.getKourseName }}</h4>
+                                                            <hr>
+                                                            <p><strong>Інструктор:</strong> {{ instructor.getFirstname}} {{ instructor.getLastname}}</p>
+                                                            <p><strong>Тривалість:</strong> {{ course.getStartTime|date('Y-m-d H:i:s')}} - {{ course.getEndTime|date('Y-m-d H:i:s')}}</p>
+                                                            <p>{{ coursesInfo[0].getFirstParagraph }}</p>
+                                                            <!-- Button trigger modal -->
+                                                            <div class="w-100 d-flex justify-content-center pt-2 pb-4">
+                                                                <button type="button" class="btn register_btn mx-auto" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ course.getId }}">
+                                                                    Переглянути навички які можливо отримати
+                                                                </button>
+                                                            </div>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModal_{{ course.getId }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Навички які можливо отримати на курсі</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                         {% for skill in coursesInfo[0].getSkills %}
+                                                                         <p>- {{ skill }}</p>
+                                                                         {% endfor %}
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary register_btn" data-bs-dismiss="modal">Закрити</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <p>{{ coursesInfo[0].getEndParagraph }}</p>
+                                                        </div>
+                                                    {% endfor %}
                                                     <button class="form-control register_btn" type="submit"> Записатися
                                                     </button>
                                                 </form>
@@ -62,6 +99,6 @@
                 </div>
             </div>
         </section>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+
         <script type="text/javascript" src="{{ asset('/js/course_appointment.js') }}"></script>
     {% endblock %}

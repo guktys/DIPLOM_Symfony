@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Model\CourseStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: 'App\Repository\CoursesRepository')]
 #[ORM\Table(name: 'courses')]
@@ -16,7 +18,9 @@ class Courses
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private  $kourseName;
+    private $kourseName;
+    #[ORM\OneToMany(targetEntity: CoursesInfo::class, mappedBy: 'courses')]
+    private ?Collection $coursesInfo = null;
 
     #[ORM\Column(type: 'text')]
     private ?string $description = null;
@@ -28,7 +32,7 @@ class Courses
     private \DateTime $endTime;
 
     #[ORM\Column(type: 'string')]
-    private  $status;
+    private $status;
 
     /**
      * @return int|null
@@ -62,6 +66,21 @@ class Courses
         $this->kourseName = $kourseName;
     }
 
+    /**
+     * @return Collection|null
+     */
+    public function getCoursesInfo(): ?Collection
+    {
+        return $this->coursesInfo;
+    }
+
+    /**
+     * @param Collection|null $coursesInfo
+     */
+    public function setCoursesInfo(?Collection $coursesInfo): void
+    {
+        $this->coursesInfo = $coursesInfo;
+    }
 
 
     /**
@@ -79,6 +98,7 @@ class Courses
     {
         $this->description = $description;
     }
+
 
     /**
      * @return \DateTime
@@ -127,8 +147,6 @@ class Courses
     {
         $this->status = $status;
     }
-
-
 
 
 }

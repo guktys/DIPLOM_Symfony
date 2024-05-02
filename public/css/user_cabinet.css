@@ -22,3 +22,9 @@
     border-color: #886d3f;
     color: white;
 }
+.course-info-name{
+    cursor: pointer;
+}
+.course-info-name:hover{
+    color: #B69256;
+}

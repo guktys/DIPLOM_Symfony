@@ -38,31 +38,40 @@ class CoursesController extends AbstractController
     #[Route('/courses_appointment', name: 'courses_appointment')]
     public function coursesAppointment()
     {
+        $coursesInfo = [];
         $courses = $this->courseRepository->findBy(['status' => CourseStatus::ENROLLMENT->value]);
-
+        foreach ($courses as $course) {
+            $coursesInfo[$course->getId()] = $course->getCoursesInfo();
+        }
         return $this->render('courses_appointment.html.twig', [
             'courses' => $courses,
+            'coursesInfos' => $coursesInfo,
         ]);
     }
 
     #[Route('/courses_appointment_save', name: 'courses_appointment_save')]
     public function coursesAppointmentSave(Request $request, EntityManagerInterface $entityManager)
     {
-        $course = $request->get('course');
+        $courseId = $request->get('course');
         $user = $this->getUser();
-        $course = $this->courseRepository->findOneBy(['id' => $course]);
-        $courseStudent = new CoursesStudent();
-        $courseStudent->setKourse($course);
-        $courseStudent->setUser($user);
-        $courseStudent->setStartTime($course->getStartTime());
-        $courseStudent->setEndTime($course->getEndTime());
-        $courseStudent->setStatus(CourseStudent::ENROLLMENT->value);
-        $entityManager->persist($courseStudent);
-        $entityManager->flush();
-        if ($courseStudent->getId()) {
-            return new JsonResponse(['success' => true, 'message' => 'Ви успішно записані!']);
+        $course = $this->courseRepository->findOneBy(['id' => $courseId]);
+        $courseStudent = $this->courseStudentRepository->findOneBy(['user' => $user->getId(), 'kourse' => $course->getId()]);
+        if ($courseStudent) {
+            return new JsonResponse(['success' => 'isInBase', 'message' => 'Ви вже записані на цей курс!']);
         } else {
-            return new JsonResponse(['success' => false, 'message' => 'Помилка, спробуйте будь ласка знову пізніше']);
+            $courseStudent = new CoursesStudent();
+            $courseStudent->setKourse($course);
+            $courseStudent->setUser($user);
+            $courseStudent->setStartTime($course->getStartTime());
+            $courseStudent->setEndTime($course->getEndTime());
+            $courseStudent->setStatus(CourseStudent::ENROLLMENT->value);
+            $entityManager->persist($courseStudent);
+            $entityManager->flush();
+            if ($courseStudent->getId()) {
+                return new JsonResponse(['success' => true, 'message' => 'Ви успішно записані!']);
+            } else {
+                return new JsonResponse(['success' => false, 'message' => 'Помилка, спробуйте будь ласка знову пізніше']);
+            }
         }
     }
 }

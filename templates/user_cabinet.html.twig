@@ -181,11 +181,46 @@
                             </thead>
                             <tbody>
                             {% for course in courses %}
+                                {% set coursesInfo = course.getCoursesInfo %}
+                                {% set instructor = coursesInfo[0].getInstructor %}
+                                {% set course = coursesInfo[0].getCourses %}
                                 <tr>
                                     <th>{{ course.getId }}</th>
-                                    <td>{{ course.getKourseName }}</td>
+                                    <td>{{ course.getKourseName }}
+                                        <i class="fa fa-question-circle course-info-name" aria-hidden="true"
+                                           data-bs-toggle="modal" data-bs-target="#exampleModal_{{ course.getId }}"></i>
+                                    </td>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal_{{ course.getId }}" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Інфо про курс</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h4>{{ course.getKourseName }}</h4>
+                                                    <hr>
+                                                    <p>
+                                                        <strong>Інструктор:</strong> {{ instructor.getFirstname }} {{ instructor.getLastname }}
+                                                    </p>
+                                                    <p>
+                                                        <strong>Тривалість:</strong> {{ course.getStartTime|date('Y-m-d H:i:s') }}
+                                                        - {{ course.getEndTime|date('Y-m-d H:i:s') }}</p>
+                                                    <p>{{ coursesInfo[0].getFirstParagraph }}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary register_btn"
+                                                            data-bs-dismiss="modal">Закрити
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <td>{{ course.getStartTime|date('Y-m-d H:i:s') }}</td>
-                                    <th>{{ course.getEndTime|date('Y-m-d H:i:s') }}</th>
+                                    <td>{{ course.getEndTime|date('Y-m-d H:i:s') }}</td>
                                     <td>{{ course.getStatus }}</td>
                                 </tr>
                             {% endfor %}
