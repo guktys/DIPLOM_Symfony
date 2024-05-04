@@ -18,7 +18,10 @@ class Courses
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $kourseName;
+    private ?string $kourseName;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $courseType;
     #[ORM\OneToMany(targetEntity: CoursesInfo::class, mappedBy: 'courses')]
     private ?Collection $coursesInfo = null;
 
@@ -49,6 +52,23 @@ class Courses
     {
         $this->id = $id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCourseType()
+    {
+        return $this->courseType;
+    }
+
+    /**
+     * @param mixed $courseType
+     */
+    public function setCourseType($courseType): void
+    {
+        $this->courseType = $courseType;
+    }
+
 
     /**
      * @return mixed

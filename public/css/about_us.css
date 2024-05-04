@@ -1,0 +1,60 @@
+.about-us-banner {
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position-x: left;
+    display: flex;
+    justify-content: right;
+    height: 508px;
+}
+
+.about-us-banner-btn {
+    background-color: #B69256;
+    border-color: #B69256;
+    color: white;
+    height: 40px;
+    width: 200px;
+}
+
+.about-us-banner-btn:hover {
+    background-color: #886d3f;
+    border-color: #886d3f;
+    color: white;
+}
+
+.about-us_btn {
+    background-color: white;
+    border-color: white;
+    color: #B69256;
+}
+
+.about-us_btn:hover {
+    background-color: #886d3f;
+    border-color: #886d3f;
+    color: white;
+}
+
+.about-us-banner_grafik {
+    height: inherit;
+    width: 85%;
+}
+
+.grafik {
+    background-color: #B69256;
+    color: white;
+    padding-left: 0px;
+}
+
+.map {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+#map_iframe {
+    width: 100%;
+}
+.contact_container {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #B69256;
+    padding-top: 0px;
+}

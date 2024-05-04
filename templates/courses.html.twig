@@ -1,12 +1,16 @@
 {% extends 'base.html.twig' %}
     {% block body %}
         <link href="{{ asset('css/courses.css') }}" rel="stylesheet"/>
+        {% set courseTypeManicur = constant('App\\Model\\CourseType::MANICUR').value %}
+        {% set courseTypeElectroEpil = constant('App\\Model\\CourseType::ELECTRO_EPIL').value %}
         <div class="courses-banner position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary"
-        style="background-image: url({{ asset('images/course_banner.png') }})">
+             style="background-image: url({{ asset('images/course_banner.png') }})">
             <div class="col-md-5 p-lg-3 my-5">
                 <h1 class="display-3 fw-bold">Бажаєш класні навички?</h1>
                 <h3 class="fw-normal text-muted mb-3">В чому проблема? Записуйся до нас на курси вже сьогодні!</h3>
-                <a href="{{ path('courses_appointment') }}"><button class="courses-banner-btn btn">Записатися</button></a>
+                <a href="{{ path('courses_appointment') }}">
+                    <button class="courses-banner-btn btn">Записатися</button>
+                </a>
             </div>
             <div class="product-device shadow-sm d-none d-md-block"></div>
             <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
@@ -29,7 +33,7 @@
             </div>
             <div class="row mt-3  d-flex justify-content-center nail-block kurs-text">
                 <div class="col kurs-img nail">
-                    <a href="{{ path('courses_appointment') }}">
+                    <a href="{{ path('courses_appointment',{ 'type': courseTypeManicur }) }}">
                         <div class="box">
                             <div class="box-inner">
                                 <div class="box-front kurs-nail-front  d-flex justify-content-center"
@@ -64,7 +68,7 @@
             </div>
             <div class="row mt-3  d-flex justify-content-center nail-block kurs-text">
                 <div class="col kurs-img nail">
-                    <a href="{{ path('courses_appointment') }}">
+                    <a href="{{ path('courses_appointment',{ 'type': courseTypeElectroEpil }) }}">
                         <div class="box">
                             <div class="box-inner">
                                 <div class="box-front kurs-nail-front  d-flex justify-content-center"

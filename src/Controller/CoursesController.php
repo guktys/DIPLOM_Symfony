@@ -36,10 +36,15 @@ class CoursesController extends AbstractController
     }
 
     #[Route('/courses_appointment', name: 'courses_appointment')]
-    public function coursesAppointment()
+    public function coursesAppointment(Request $request)
     {
         $coursesInfo = [];
-        $courses = $this->courseRepository->findBy(['status' => CourseStatus::ENROLLMENT->value]);
+        if ($request->query->has('type')) {
+            $courseType = $request->query->get('type');
+            $courses = $this->courseRepository->findBy(['status' => CourseStatus::ENROLLMENT->value, 'courseType' => $courseType]);
+        } else {
+            $courses = $this->courseRepository->findBy(['status' => CourseStatus::ENROLLMENT->value]);
+        }
         foreach ($courses as $course) {
             $coursesInfo[$course->getId()] = $course->getCoursesInfo();
         }
@@ -65,6 +70,7 @@ class CoursesController extends AbstractController
             $courseStudent->setStartTime($course->getStartTime());
             $courseStudent->setEndTime($course->getEndTime());
             $courseStudent->setStatus(CourseStudent::ENROLLMENT->value);
+
             $entityManager->persist($courseStudent);
             $entityManager->flush();
             if ($courseStudent->getId()) {
