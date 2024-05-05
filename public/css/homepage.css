@@ -1,4 +1,4 @@
-.homepage_banner{
+.homepage_banner {
     background-size: cover;
     background-position-y: center;
     height: 600px;
@@ -8,10 +8,12 @@
     width: auto;
     border-radius: 0 0 20% 20%;
 }
-.banner_text{
+
+.banner_text {
     margin-top: 85px;
 }
-.banner_btn{
+
+.banner_btn {
     background-color: #B69256;
     text-align: center;
     height: 50px;
@@ -20,9 +22,11 @@
     border-color: #00213d00;
     font-size: 17px;
 }
-.banner_btn:hover{
+
+.banner_btn:hover {
     background-color: #886d3f;
 }
+
 a {
     text-decoration: none;
     color: inherit;
@@ -32,34 +36,42 @@ a:hover {
     text-decoration: none;
     color: inherit;
 }
-.services{
+
+.services {
     padding-right: 0px;
     padding-left: 0px;
 }
+
 .services_img {
     width: 100%;
     height: inherit;
 }
-.prices{
+
+.prices {
     background-color: #f0eded;
     text-align: left;
 }
-.services_title{
+
+.services_title {
     padding-bottom: 15px;
     margin-left: 10px;
 }
+
 .prices p {
     color: #575656;
     margin-left: 10px;
 }
+
 .services {
     height: 250px;
     width: 220px;
     overflow: hidden;
 }
-.services_col{
+
+.services_col {
     width: 660px;
 }
+
 .swiper {
     width: 60%;
     padding-top: 50px;
@@ -77,21 +89,25 @@ a:hover {
     display: block;
     width: 100%;
 }
+
 .swiper-button-prev {
     position: relative;
     height: inherit;
     color: #ffffff;
 }
-.swiper-button-next{
+
+.swiper-button-next {
     position: relative;
     height: inherit;
     color: #ffffff;
 }
+
 .slider_container {
     display: flex;
     flex-wrap: nowrap;
     padding-bottom: 25px;
 }
+
 .swiper-button-prev::after {
     font-family: swiper-icons;
     font-size: 34px;
@@ -105,6 +121,7 @@ a:hover {
     border-radius: 50%;
     text-align: center;
 }
+
 .swiper-button-next::after {
     font-family: swiper-icons;
     font-size: 34px;
@@ -118,38 +135,45 @@ a:hover {
     border-radius: 50%;
     text-align: center;
 }
-.call_us_banner{
+
+.call_us_banner {
     width: inherit;
     height: 100%;
 }
+
 .contact_container {
     display: flex;
     justify-content: center;
     padding-bottom: 10px;
 }
+
 .contact.form {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: end;
 }
-.contact_banner{
+
+.contact_banner {
     height: 100%;
     justify-content: center;
     display: flex;
     align-content: center;
 }
-.contact_btn{
+
+.contact_btn {
     background-color: #B69256;
     border-color: #B69256;
     color: white;
     height: 50px;
 }
-.contact_btn:hover{
+
+.contact_btn:hover {
     background-color: #886d3f;
     border-color: #886d3f;
     color: white;
 }
+
 #validationTextarea {
     height: 145px;
 }
@@ -159,35 +183,43 @@ hr {
     margin-left: auto;
     margin-right: auto;
 }
+
 .kyrsu_banner {
     height: inherit;
     width: 85%;
+    border-radius: 10px;
 }
+
 .kyrsu_text {
     text-align: left;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.home_btn{
+
+.home_btn {
     background-color: #B69256;
     border-color: #B69256;
     color: white;
 }
-.home_btn:hover{
+
+.home_btn:hover {
     background-color: #886d3f;
     border-color: #886d3f;
     color: white;
 }
+
 .btn.home_btn {
     height: 50px;
     width: 240px;
     margin-top: 20px;
 }
-.kyrsu_hr{
+
+.kyrsu_hr {
     width: 636px;
     margin-left: auto;
     margin-right: auto;
 }
+
 video {
     position: absolute;
     top: 50%;
@@ -198,14 +230,18 @@ video {
     object-fit: cover;
     z-index: -1000; /* Помещаем видео под остальные элементы */
 }
+
 #main_menu .nav-link {
     color: white;
 }
-.appointment_banner{
+
+.appointment_banner {
     background-color: #B69256;
     overflow: hidden;
     height: 221px;
+    border-radius: 10px;
 }
+
 .appointment_banner .btn.home_btn {
     color: #B69256;
     height: inherit;
@@ -214,18 +250,22 @@ video {
     margin-top: -6px;
     text-align: center;
 }
+
 .appointment_banner_img {
     height: auto;
     width: 53%;
 }
-.appointment_banner_img_foot{
+
+.appointment_banner_img_foot {
     width: 44%;
     margin-top: -26px;
 }
-.appointment_banner_master_hand{
+
+.appointment_banner_master_hand {
     height: auto;
     width: 45%;
 }
+
 .master_banner {
     background-position-x: center;
     background-repeat: no-repeat;
@@ -234,9 +274,11 @@ video {
     height: inherit;
 
 }
+
 .master_banner .row {
     height: inherit;
 }
+
 @keyframes tilt {
     0% {
         transform: rotate(0deg);
@@ -256,6 +298,44 @@ video {
 .master_banner:hover {
     animation: tilt 1s ease-in-out infinite alternate; /* Анимация при наведении */
 }
-#header{
-  position: fixed!important;
+
+#header {
+    position: fixed !important;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.master-foto-container {
+    width: 180px;
+    border-radius: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profession {
+    color: #2b2a2a;
+}
+.seniority-container{
+    background-color: #B69256;
+}
+.master_inst_btn{
+    border-color: #B69256;
+    background-color: white;
+    color: #B69256;
+}
+.master_inst_btn:hover{
+    background-color: #B69256;
+    color: white;
+}
+.master_appointment{
+    background-color: #B69256;
+    color: white;
+}
+.master_appointment:hover{
+    background-color: white;
+    border-color: #B69256;
+    color: #B69256;
 }

@@ -44,3 +44,14 @@ a:hover {
     font-size: x-large;
     color: #B69256;
 }
+.register_url{
+    color: #B69256;
+    text-decoration: underline;
+}
+.register_url:hover{
+    color: #886d3f;
+    text-decoration: underline;
+}
+.const_container{
+    display: none;
+}

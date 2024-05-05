@@ -29,7 +29,7 @@ class RegistrationController extends AbstractController
          $user->setFirstname($request->get('firstname'));
          $user->setLastname($request->get('lastname'));
          $user->setPhone($request->get('phone'));
-         $user->setTelegramUrl('');
+         $user->setUserDetails(null);
          $user->setRoles((array)'ROLE_USER');
          $user->setLogo('logo.png');
          $plaintextPassword = ($request->get('confirm_password'));

@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -28,8 +29,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private string $phone;
 
-    #[ORM\Column(type: 'string')]
-    private string $telegram_url;
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
@@ -39,6 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     private string $logo;
+
+    #[ORM\OneToOne(targetEntity: UserDetails::class, mappedBy: "user", cascade: ["persist"])]
+    private ?UserDetails $userDetails = null;
 
     public function getId(): ?int
     {
@@ -149,13 +151,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->phone = $phone;
     }
 
-    /**
-     * @return string
-     */
-    public function getTelegramUrl(): string
-    {
-        return $this->telegram_url;
-    }
 
     /**
      * @return string
@@ -174,12 +169,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param string $telegram_url
+     * @return UserDetails|null
      */
-    public function setTelegramUrl(string $telegram_url): void
+    public function getUserDetails(): ?UserDetails
     {
-        $this->telegram_url = $telegram_url;
+        return $this->userDetails;
     }
+
+    /**
+     * @param UserDetails|null $userDetails
+     */
+    public function setUserDetails(?UserDetails $userDetails): void
+    {
+        $this->userDetails = $userDetails;
+    }
+
+
 
     /**
      * @see UserInterface

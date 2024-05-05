@@ -52,6 +52,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">id</th>
+                                <th scope="col">Процедура</th>
                                 <th scope="col">Час запису</th>
                                 <th scope="col">Ваш майстер</th>
                                 <th scope="col">Статус вашого запису</th>
@@ -61,6 +62,7 @@
                             {% for appointment  in userAppointments %}
                                 <tr>
                                     <th>{{ appointment.getId }}</th>
+                                    <th>{{ appointment.getService.getName}}</th>
                                     <td>{{ appointment.getTime|date('Y-m-d H:i:s') }}</td>
                                     <td>{{ appointment.getEmployer.getFirstname }} {{ appointment.getEmployer.getLastname }}</td>
                                     <th>{{ appointment.getStatus }}</th>
