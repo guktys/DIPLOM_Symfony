@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\AppointmentStatus;
 use App\Model\ServicesType;
 use App\Repository\AppointmentRepository;
+use App\Repository\AppointmentStatusRepository;
 use App\Repository\CoursesStudentRepository;
 use App\Repository\ServicesRepository;
 use App\Repository\UserRepository;
@@ -24,9 +26,18 @@ class UserCabinetController extends AbstractController
     private ServicesRepository $servicesRepository;
     private $kernel;
     private $em;
-    private $coursesStudentRepository;
+    private CoursesStudentRepository $coursesStudentRepository;
+    private AppointmentStatusRepository $appointmentStatusRepository;
 
-    public function __construct(UserRepository $userRepository, AppointmentRepository $appointmentRepository, KernelInterface $kernel, EntityManagerInterface $em, CoursesStudentRepository $coursesStudentRepository, ServicesRepository $servicesRepository)
+    public function __construct(
+        UserRepository              $userRepository,
+        AppointmentRepository       $appointmentRepository,
+        KernelInterface             $kernel,
+        EntityManagerInterface      $em,
+        CoursesStudentRepository    $coursesStudentRepository,
+        ServicesRepository          $servicesRepository,
+        AppointmentStatusRepository $appointmentStatusRepository
+    )
     {
         $this->userRepository = $userRepository;
         $this->appointmentRepository = $appointmentRepository;
@@ -34,14 +45,16 @@ class UserCabinetController extends AbstractController
         $this->em = $em;
         $this->coursesStudentRepository = $coursesStudentRepository;
         $this->servicesRepository = $servicesRepository;
+        $this->appointmentStatusRepository = $appointmentStatusRepository;
     }
 
     #[Route('/master_cabinet', name: 'master_cabinet')]
     public function masterCabinet()
     {
-        $courses =[];
+        $courses = [];
         $services = [];
         $master = $this->getUser();
+        $statuses = [];
         $userAppointments = $this->appointmentRepository->findBy(['employer' => $master]);
         $coursesStudent = $this->coursesStudentRepository->findBy(['user' => $master]);
         foreach ($coursesStudent as $courseStudent) {
@@ -52,18 +65,20 @@ class UserCabinetController extends AbstractController
         foreach ($masterAbilitys as $masterAbility) {
             $services = $this->servicesRepository->findBy(['category' => $masterAbility, 'type' => ServicesType::SERVICE]);
         }
+        $statuses = $this->appointmentStatusRepository->findAll();
         return $this->render('master_cabinet.html.twig', [
             'user' => $master,
             'userAppointments' => $userAppointments,
             'courses' => $courses,
             'services' => $services,
+            'statuses' => $statuses,
         ]);
     }
 
     #[Route('/user_cabinet', name: 'user_cabinet')]
     public function userСabinet()
     {
-        $courses =[];
+        $courses = [];
         $user = $this->getUser();
         $userAppointments = $this->appointmentRepository->findBy(['user' => $this->getUser()]);
         $coursesStudent = $this->coursesStudentRepository->findBy(['user' => $this->getUser()]);

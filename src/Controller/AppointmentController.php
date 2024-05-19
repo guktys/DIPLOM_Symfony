@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Appointment;
+use App\Entity\AppointmentStatus;
 use App\Entity\User;
 use App\Model\ServicesType;
 use App\Repository\AppointmentRepository;
+use App\Repository\AppointmentStatusRepository;
 use App\Repository\ServicesRepository;
 use App\Repository\UserRepository;
 use DateTime;
@@ -13,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AppointmentController extends AbstractController
@@ -20,12 +23,19 @@ class AppointmentController extends AbstractController
     private UserRepository $userRepository;
     private ServicesRepository $servicesRepository;
     private AppointmentRepository $appointmentRepository;
+    private AppointmentStatusRepository $appointmentStatus;
 
-    public function __construct(UserRepository $userRepository, ServicesRepository $servicesRepository, AppointmentRepository $appointmentRepository)
+    public function __construct(
+        UserRepository        $userRepository,
+        ServicesRepository    $servicesRepository,
+        AppointmentRepository $appointmentRepository,
+        AppointmentStatusRepository     $appointmentStatus
+    )
     {
         $this->userRepository = $userRepository;
         $this->servicesRepository = $servicesRepository;
         $this->appointmentRepository = $appointmentRepository;
+        $this->appointmentStatus = $appointmentStatus;
     }
 
     #[Route('/appointment', name: 'appointment')]
@@ -66,15 +76,17 @@ class AppointmentController extends AbstractController
         $requestAll = $request->request->all();
         $appointment = $this->appointmentRepository->findOneBy(['id' => $request->get('id')]);
         $service = $this->servicesRepository->findOneBy(['id' => $request->get('service')]);
+        $status = $this->appointmentStatus->findOneBy(['id' => $request->get('status')]);
         if ($appointment) {
             $appointment->setPrice($request->get('appointmentPrice'));
             $appointment->setTime(new DateTime($request->get('appointmentTime')));
-            $appointment->setStatus($request->get('appointmentStatus'));
+            $appointment->setStatus($status);
             $appointment->setService($service);
             $entityManager->persist($appointment);
             $entityManager->flush();
         }
-        return new JsonResponse(['success' => true, 'message' => $requestAll]);
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
 
     #[Route('/appointment_save', name: 'appointment_save')]
@@ -84,6 +96,7 @@ class AppointmentController extends AbstractController
         $master = $this->userRepository->findOneBy(['id' => $request->get('master')]);
         $user = $this->getUser();
         $service = $this->servicesRepository->findOneBy(['id' => $request->get('service')]);
+        $status = $this->appointmentStatus->findOneBy(['name' => "WAITING"]);
         $appointment = new Appointment();
         $appointment->setEmployer($master);
         $appointment->setCreateAt(new DateTime());
@@ -91,7 +104,7 @@ class AppointmentController extends AbstractController
         $appointment->setService($service);
         $appointment->setPrice($request->get('price'));
         $appointment->setTime(new DateTime($request->get('time')));
-        $appointment->setStatus('WAITING');
+        $appointment->setStatus($status);
 
         $entityManager->persist($appointment);
         $entityManager->flush();

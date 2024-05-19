@@ -30,8 +30,8 @@ class Appointment
     #[ORM\Column(name: 'time', type: 'datetime')]
     private \DateTime $time;
 
-    #[ORM\Column(type: 'string')]
-    private string $status;
+    #[ORM\ManyToOne(targetEntity: AppointmentStatus::class, inversedBy: 'id')]
+    private ?AppointmentStatus $status = null;
 
     /**
      * @return int|null
@@ -116,20 +116,23 @@ class Appointment
     }
 
     /**
-     * @return string
+     * @return AppointmentStatus|null
      */
-    public function getStatus(): string
+    public function getStatus(): ?AppointmentStatus
     {
         return $this->status;
     }
 
     /**
-     * @param string $status
+     * @param AppointmentStatus|null $status
      */
-    public function setStatus(string $status): void
+    public function setStatus(?AppointmentStatus $status): void
     {
         $this->status = $status;
     }
+
+
+
 
     /**
      * @return User

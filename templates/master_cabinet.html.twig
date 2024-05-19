@@ -63,7 +63,7 @@
                                  {% for appointment  in userAppointments %}
                                      <tr>
                                          <th>{{ appointment.getId }}</th>
-                                         <th class="table-block">
+                                         <th>
                                              <button type="button" class="change-btn" data-bs-toggle="modal"
                                                      data-bs-target="#changeAppointment_{{ appointment.getId }}">
                                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -97,7 +97,7 @@
                                                                              <option class="{{ service.getCategory }}"
                                                                                      value="{{ service.getId }}"
                                                                                      {% if appointment.getService.getId == service.getId %}
-                                                                                    selected
+                                                                                         selected
                                                                                      {% endif %}
                                                                              >
                                                                                  {{ service.getName }}
@@ -124,10 +124,20 @@
                                                                  <div class="mb-3">
                                                                      <label for="appointmentStatus_{{ appointment.getId }}"
                                                                             class="form-label">Статус</label>
-                                                                     <input type="text" class="form-control"
-                                                                            id="appointmentStatus_{{ appointment.getId }}"
-                                                                            name="appointmentStatus"
-                                                                            value="{{ appointment.getStatus }}">
+                                                                     <select class="form-select"
+                                                                             id="status_{{ appointment.getId }}"
+                                                                             name="status"
+                                                                             aria-label="Default select example">
+                                                                         {% for status in statuses %}
+                                                                             <option value="{{ status.getId }}"
+                                                                                     {% if appointment.getStatus.getId ?? null == status.getId %}
+                                                                                         selected
+                                                                                     {% endif %}
+                                                                             >
+                                                                                 {{ status.getNameUA }}
+                                                                             </option>
+                                                                         {% endfor %}
+                                                                     </select>
                                                                  </div>
                                                              </div>
                                                              <div class="modal-footer">
@@ -148,10 +158,12 @@
                                          </th>
                                          <td>{{ appointment.getTime|date('Y-m-d H:i:s') }}</td>
                                          <th>{{ appointment.getPrice }}</th>
-                                         <td>{{ appointment.getUser.getFirstname }} {{ appointment.getUser.getLastname }}
+                                         <td>
+                                             <p>{{ appointment.getUser.getFirstname }} {{ appointment.getUser.getLastname }}</p>
                                              <i class="fa fa-question-circle course-info-name" aria-hidden="true"
                                                 data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal_{{ appointment.getUser.getId }}"></i></td>
+                                                data-bs-target="#exampleModal_{{ appointment.getUser.getId }}"></i>
+                                         </td>
                                          <!-- Modal -->
                                          <div class="modal fade" id="exampleModal_{{ appointment.getUser.getId }}"
                                               tabindex="-1"
@@ -182,7 +194,7 @@
                                                  </div>
                                              </div>
                                          </div>
-                                         <td>{{ appointment.getStatus }}</td>
+                                         <td>{{ appointment.getStatus.getNameUA ?? NULL }}</td>
                                      </tr>
                                  {% endfor %}
                                  </tbody>
