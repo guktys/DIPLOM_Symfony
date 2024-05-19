@@ -19,7 +19,6 @@ final class UserAdmin extends AbstractAdmin
             ->add('lastName')
             ->add('email')
             ->add('phone')
-            ->add('telegram_url')
             ->add('logo');
     }
 
@@ -31,7 +30,6 @@ final class UserAdmin extends AbstractAdmin
             ->add('lastName')
             ->add('email')
             ->add('phone')
-            ->add('telegram_url')
             ->add('logo');
     }
    // страница таблицы сущностей
@@ -43,7 +41,6 @@ final class UserAdmin extends AbstractAdmin
             ->add('email')
             ->add('roles')
             ->add('phone')
-            ->add('telegram_url')
             ->add('logo');
     }
     // страница сущности
@@ -55,7 +52,6 @@ final class UserAdmin extends AbstractAdmin
             ->add('email')
             ->add('roles')
             ->add('phone')
-            ->add('telegram_url')
             ->add('logo');
     }
 }
