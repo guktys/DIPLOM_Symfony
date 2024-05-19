@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Model\ServicesType;
 use App\Repository\AppointmentRepository;
 use App\Repository\CoursesStudentRepository;
+use App\Repository\ServicesRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,25 +21,42 @@ class UserCabinetController extends AbstractController
 {
     private UserRepository $userRepository;
     private AppointmentRepository $appointmentRepository;
+    private ServicesRepository $servicesRepository;
     private $kernel;
     private $em;
     private $coursesStudentRepository;
 
-    public function __construct(UserRepository $userRepository, AppointmentRepository $appointmentRepository, KernelInterface $kernel, EntityManagerInterface $em, CoursesStudentRepository $coursesStudentRepository)
+    public function __construct(UserRepository $userRepository, AppointmentRepository $appointmentRepository, KernelInterface $kernel, EntityManagerInterface $em, CoursesStudentRepository $coursesStudentRepository, ServicesRepository $servicesRepository)
     {
         $this->userRepository = $userRepository;
         $this->appointmentRepository = $appointmentRepository;
         $this->kernel = $kernel;
         $this->em = $em;
         $this->coursesStudentRepository = $coursesStudentRepository;
+        $this->servicesRepository = $servicesRepository;
     }
 
     #[Route('/master_cabinet', name: 'master_cabinet')]
-    public function masterСabinet()
+    public function masterCabinet()
     {
-
+        $courses =[];
+        $services = [];
+        $master = $this->getUser();
+        $userAppointments = $this->appointmentRepository->findBy(['employer' => $master]);
+        $coursesStudent = $this->coursesStudentRepository->findBy(['user' => $master]);
+        foreach ($coursesStudent as $courseStudent) {
+            $courses[] = $courseStudent->getKourse();
+        }
+        $masterDetails = $master->getUserDetails();
+        $masterAbilitys = $masterDetails->getAbilitys();
+        foreach ($masterAbilitys as $masterAbility) {
+            $services = $this->servicesRepository->findBy(['category' => $masterAbility, 'type' => ServicesType::SERVICE]);
+        }
         return $this->render('master_cabinet.html.twig', [
-
+            'user' => $master,
+            'userAppointments' => $userAppointments,
+            'courses' => $courses,
+            'services' => $services,
         ]);
     }
 

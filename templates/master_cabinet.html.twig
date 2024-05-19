@@ -1,5 +1,359 @@
 {% extends 'base.html.twig' %}
 
      {% block body %}
+         <link href="{{ asset('css/user_cabinet.css') }}" rel="stylesheet"/>
+         <section class="py-3 text-center container">
 
+             <div class="row py-lg-5">
+                 <div class="col">
+                     <div class="d-flex d-flex justify-content-center flex-column">
+                         {% if user.getLogo %}
+                             <div class="user-logo"
+                                  style='background-image: url("{{ asset('images/user-photo/' ~ user.getLogo) }}")'>
+                             </div>
+                         {% else %}
+                             <img class="user-logo" src="{{ asset('images/user-photo/base_user_logo.png') }}">
+                         {% endif %}
+                         <h3 class="">Вітаємо, {{ user.getFirstname }} {{ user.getLastname }}</h3>
+                         <hr>
+                     </div>
+                 </div>
+                 <div class="col col-md-8 mx-auto">
+                     <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                         <li class="nav-item" role="presentation">
+                             <button class="user-tab nav-link active" id="tab1-tab" data-bs-toggle="tab"
+                                     data-bs-target="#tab1"
+                                     type="button" role="tab" aria-controls="tab1" aria-selected="true">Ваші записи
+                             </button>
+                         </li>
+                         <li class="nav-item" role="presentation">
+                             <button class="user-tab nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2"
+                                     type="button"
+                                     role="tab" aria-controls="tab2" aria-selected="false">Налаштування
+                             </button>
+                         </li>
+                         <li class="nav-item" role="presentation">
+                             <button class="user-tab nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3"
+                                     type="button"
+                                     role="tab" aria-controls="tab3" aria-selected="false">Ваші дані
+                             </button>
+                         </li>
+                         <li class="nav-item" role="presentation">
+                             <button class="user-tab nav-link" id="tab4-tab" data-bs-toggle="tab" data-bs-target="#tab4"
+                                     type="button"
+                                     role="tab" aria-controls="tab4" aria-selected="false">Ваші курси
+                             </button>
+                         </li>
+                     </ul>
+                     <div class="tab-content" id="myTabsContent">
+                         <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                             <h3 class="mt-4">Записи до вас:</h3>
+                             <table class="table">
+                                 <thead>
+                                 <tr>
+                                     <th scope="col">#</th>
+                                     <th scope="col">Процедура</th>
+                                     <th scope="col">Час запису</th>
+                                     <th scope="col">Приблизна ціна</th>
+                                     <th scope="col">Ваш клієнт</th>
+                                     <th scope="col">Статус запису</th>
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                 {% for appointment  in userAppointments %}
+                                     <tr>
+                                         <th>{{ appointment.getId }}</th>
+                                         <th class="table-block">
+                                             <button type="button" class="change-btn" data-bs-toggle="modal"
+                                                     data-bs-target="#changeAppointment_{{ appointment.getId }}">
+                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                             </button>
+                                             <div class="modal fade" id="changeAppointment_{{ appointment.getId }}"
+                                                  tabindex="-1"
+                                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                 <div class="modal-dialog">
+                                                     <div class="modal-content">
+                                                         <div class="modal-header">
+                                                             <h5 class="modal-title" id="exampleModalLabel">Інфо про
+                                                                 запис</h5>
+                                                             <button type="button" class="btn-close"
+                                                                     data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                                                         </div>
+                                                         <form id="appointmentForm_{{ appointment.getId }}"
+                                                               action="{{ path('appointment_update') }}" method="post">
+                                                             <div class="modal-body">
+                                                                 <input type="text" class="form-control d-none"
+                                                                        id="id_{{ appointment.getId }}"
+                                                                        name="id"
+                                                                        value="{{ appointment.getId }}">
+                                                                 <div class="mb-3">
+                                                                     <label for="serviceName_{{ appointment.getId }}"
+                                                                            class="form-label">Назва послуги</label>
+                                                                     <select class="form-select" id="service"
+                                                                             name="service"
+                                                                             aria-label="Default select example">
+                                                                         {% for service in services %}
+                                                                             <option class="{{ service.getCategory }}"
+                                                                                     value="{{ service.getId }}"
+                                                                                     {% if appointment.getService.getId == service.getId %}
+                                                                                    selected
+                                                                                     {% endif %}
+                                                                             >
+                                                                                 {{ service.getName }}
+                                                                             </option>
+                                                                         {% endfor %}
+                                                                     </select>
+                                                                 </div>
+                                                                 <div class="mb-3">
+                                                                     <label for="appointmentTime_{{ appointment.getId }}"
+                                                                            class="form-label">Час запису</label>
+                                                                     <input type="datetime-local" class="form-control"
+                                                                            id="appointmentTime_{{ appointment.getId }}"
+                                                                            name="appointmentTime"
+                                                                            value="{{ appointment.getTime|date() }}">
+                                                                 </div>
+                                                                 <div class="mb-3">
+                                                                     <label for="appointmentPrice_{{ appointment.getId }}"
+                                                                            class="form-label">Ціна</label>
+                                                                     <input type="text" class="form-control"
+                                                                            id="appointmentPrice_{{ appointment.getId }}"
+                                                                            name="appointmentPrice"
+                                                                            value="{{ appointment.getPrice }}">
+                                                                 </div>
+                                                                 <div class="mb-3">
+                                                                     <label for="appointmentStatus_{{ appointment.getId }}"
+                                                                            class="form-label">Статус</label>
+                                                                     <input type="text" class="form-control"
+                                                                            id="appointmentStatus_{{ appointment.getId }}"
+                                                                            name="appointmentStatus"
+                                                                            value="{{ appointment.getStatus }}">
+                                                                 </div>
+                                                             </div>
+                                                             <div class="modal-footer">
+                                                                 <button type="button" class="btn btn-secondary"
+                                                                         data-bs-dismiss="modal">Закрити
+                                                                 </button>
+                                                                 <button type="submit"
+                                                                         id="save_btn_{{ appointment.getId }}"
+                                                                         class="btn btn-primary">Зберегти зміни запису
+                                                                 </button>
+                                                             </div>
+                                                         </form>
+                                                     </div>
+
+                                                 </div>
+                                             </div>
+                                             <p class="services_table">{{ appointment.getService.getName }}</p>
+                                         </th>
+                                         <td>{{ appointment.getTime|date('Y-m-d H:i:s') }}</td>
+                                         <th>{{ appointment.getPrice }}</th>
+                                         <td>{{ appointment.getUser.getFirstname }} {{ appointment.getUser.getLastname }}
+                                             <i class="fa fa-question-circle course-info-name" aria-hidden="true"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal_{{ appointment.getUser.getId }}"></i></td>
+                                         <!-- Modal -->
+                                         <div class="modal fade" id="exampleModal_{{ appointment.getUser.getId }}"
+                                              tabindex="-1"
+                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog">
+                                                 <div class="modal-content">
+                                                     <div class="modal-header">
+                                                         <h5 class="modal-title" id="exampleModalLabel">Інфо про
+                                                             клієнта</h5>
+                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                 aria-label="Close"></button>
+                                                     </div>
+                                                     <div class="modal-body">
+                                                         <h4>{{ appointment.getUser.getFirstname }} {{ appointment.getUser.getLastname }}</h4>
+                                                         <hr>
+                                                         <div class="user-logo user-logo-mini"
+                                                              style='background-image: url("{{ asset('images/user-photo/' ~ appointment.getUser.getLogo) }}")'>
+                                                         </div>
+                                                         <p>
+                                                             <strong>Телефон:</strong> {{ appointment.getUser.getPhone }}
+                                                         </p>
+                                                     </div>
+                                                     <div class="modal-footer">
+                                                         <button type="button" class="btn btn-secondary register_btn"
+                                                                 data-bs-dismiss="modal">Закрити
+                                                         </button>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <td>{{ appointment.getStatus }}</td>
+                                     </tr>
+                                 {% endfor %}
+                                 </tbody>
+                             </table>
+
+                         </div>
+                         <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                             <h3 class="mt-4">Налаштування:</h3>
+                             <div class="row settings-row">
+                                 <div class="col">
+                                     <!-- Button trigger modal -->
+                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                             data-bs-target="#changeLogoModal">
+                                         Змінити лого
+                                     </button>
+                                 </div>
+                                 <div class="col">
+                                     <!-- Button trigger modal -->
+                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                             data-bs-target="#changePassModal">
+                                         Змінити пароль
+                                     </button>
+                                 </div>
+                             </div>
+
+                             <!-- Modal -->
+                             <div class="modal fade" id="changeLogoModal" tabindex="-1"
+                                  aria-labelledby="changeLogoModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <h5 class="modal-title" id="changeLogoModalLabel">Змінити лого</h5>
+                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                     aria-label="Close"></button>
+                                         </div>
+                                         <div class="modal-body">
+                                             <div class="mb-3">
+                                                 <label for="formFile" class="form-label">Введіть нове
+                                                     зображення</label>
+                                                 <input class="form-control" type="file" id="formFile">
+                                                 <div id="alert-success" class="alert alert-success" role="alert"
+                                                      style="display: none">
+                                                     Лого успішно збережено!
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <div class="modal-footer">
+                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                 Закрити
+                                             </button>
+                                             <button type="button" id="save-logo" class="btn btn-primary">Зберегти
+                                             </button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+
+                             <!-- Modal -->
+                             <div class="modal fade" id="changePassModal" tabindex="-1"
+                                  aria-labelledby="changePassModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog" role="document">
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <h5 class="modal-title" id="changePassModalLabel">Змінити пароль</h5>
+                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                     aria-label="Close"></button>
+                                         </div>
+                                         <div class="modal-body">
+                                             <div class="mb-3">
+                                                 <input type="password" class="form-control" id="oldPass"
+                                                        placeholder="Введіть старий пароль">
+                                             </div>
+                                             <div class="mb-3">
+                                                 <input type="password" class="form-control" id="newPass"
+                                                        placeholder="Введіть новий пароль">
+                                             </div>
+                                             <div id="alert-pass-success" class="alert alert-success" role="alert"
+                                                  style="display: none">
+                                                 Новий пароль успішно збережено!
+                                             </div>
+                                             <div id="alert-pass-danger" class="alert alert-danger" role="alert"
+                                                  style="display: none">
+                                                 Неправильно введенний старий пароль!
+                                             </div>
+
+                                         </div>
+                                         <div class="modal-footer">
+                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                 Закрити
+                                             </button>
+                                             <button type="button" id="save-pass" class="btn btn-primary">Зберегти
+                                             </button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                             <h3 class="mt-4">Ваші дані:</h3>
+                             <div class="row mt-2 text-start">
+                                 <p>Ваша пошта: {{ user.getEmail }}</p>
+                                 <p>Ваш ПІБ: {{ user.getFirstname }} {{ user.getLastname }}</p>
+                                 <p>Ваш телефон: {{ user.getPhone }}</p>
+                             </div>
+
+                         </div>
+                         <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+                             <h3 class="mt-4">Ваші курси:</h3>
+                             <table class="table">
+                                 <thead>
+                                 <tr>
+                                     <th scope="col">id</th>
+                                     <th scope="col">Назва</th>
+                                     <th scope="col">Початок</th>
+                                     <th scope="col">Кінець</th>
+                                     <th scope="col">Статус</th>
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                 {% for course in courses %}
+                                     {% set coursesInfo = course.getCoursesInfo %}
+                                     {% set instructor = coursesInfo[0].getInstructor %}
+                                     {% set course = coursesInfo[0].getCourses %}
+                                     <tr>
+                                         <th>{{ course.getId }}</th>
+                                         <td>{{ course.getKourseName }}
+                                             <i class="fa fa-question-circle course-info-name" aria-hidden="true"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal_{{ course.getId }}"></i>
+                                         </td>
+                                         <!-- Modal -->
+                                         <div class="modal fade" id="exampleModal_{{ course.getId }}" tabindex="-1"
+                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog">
+                                                 <div class="modal-content">
+                                                     <div class="modal-header">
+                                                         <h5 class="modal-title" id="exampleModalLabel">Інфо про
+                                                             курс</h5>
+                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                 aria-label="Close"></button>
+                                                     </div>
+                                                     <div class="modal-body">
+                                                         <h4>{{ course.getKourseName }}</h4>
+                                                         <hr>
+                                                         <p>
+                                                             <strong>Інструктор:</strong> {{ instructor.getFirstname }} {{ instructor.getLastname }}
+                                                         </p>
+                                                         <p>
+                                                             <strong>Тривалість:</strong> {{ course.getStartTime|date('Y-m-d H:i:s') }}
+                                                             - {{ course.getEndTime|date('Y-m-d H:i:s') }}</p>
+                                                         <p>{{ coursesInfo[0].getFirstParagraph }}</p>
+                                                     </div>
+                                                     <div class="modal-footer">
+                                                         <button type="button" class="btn btn-secondary register_btn"
+                                                                 data-bs-dismiss="modal">Закрити
+                                                         </button>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <td>{{ course.getStartTime|date('Y-m-d H:i:s') }}</td>
+                                         <td>{{ course.getEndTime|date('Y-m-d H:i:s') }}</td>
+                                         <td>{{ course.getStatus }}</td>
+                                     </tr>
+                                 {% endfor %}
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </section>
+         <script src="{{ asset('js/user_cabinet.js') }}"></script>
      {% endblock %}

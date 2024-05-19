@@ -29,6 +29,7 @@ document.getElementById('save-logo').addEventListener('click', function () {
         });
 });
 
+
 document.getElementById('save-pass').addEventListener('click', function () {
     var oldPass = document.getElementById('oldPass').value;
     var newPass = document.getElementById('newPass').value;

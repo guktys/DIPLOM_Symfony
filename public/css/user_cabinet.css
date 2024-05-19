@@ -28,3 +28,27 @@
 .course-info-name:hover{
     color: #B69256;
 }
+.user-logo-mini{
+    width: 100px;
+    height: 100px;
+}
+.change-btn {
+    background-color: #B69256;
+    border-color: #B69256;
+    color: whitesmoke;
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+}
+.change-btn:hover{
+    background-color: #886d3f;
+    border-color: #886d3f;
+    color: white;
+}
+.table-block{
+    display: flex;
+    justify-content: left;
+}
+.services_table{
+    margin-left: 5px;
+}

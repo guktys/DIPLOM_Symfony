@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Appointment;
 use App\Entity\User;
 use App\Model\ServicesType;
+use App\Repository\AppointmentRepository;
 use App\Repository\ServicesRepository;
 use App\Repository\UserRepository;
 use DateTime;
@@ -18,11 +19,13 @@ class AppointmentController extends AbstractController
 {
     private UserRepository $userRepository;
     private ServicesRepository $servicesRepository;
+    private AppointmentRepository $appointmentRepository;
 
-    public function __construct(UserRepository $userRepository, ServicesRepository $servicesRepository)
+    public function __construct(UserRepository $userRepository, ServicesRepository $servicesRepository, AppointmentRepository $appointmentRepository)
     {
         $this->userRepository = $userRepository;
         $this->servicesRepository = $servicesRepository;
+        $this->appointmentRepository = $appointmentRepository;
     }
 
     #[Route('/appointment', name: 'appointment')]
@@ -45,7 +48,7 @@ class AppointmentController extends AbstractController
         }
         foreach ($services as $service) {
             $temp = $this->servicesRepository->findBy(['category' => $service->getCategory(), 'type' => ServicesType::CONSUMABLE_ITEM]);
-            if($temp){
+            if ($temp) {
                 $consumableItems[$service->getCategory()] = $temp;
             }
         }
@@ -55,6 +58,23 @@ class AppointmentController extends AbstractController
             'masterAbilitys' => $services,
             'consumableItems' => $consumableItems,
         ]);
+    }
+
+    #[Route('/appointment_update', name: 'appointment_update')]
+    public function update(Request $request, EntityManagerInterface $entityManager)
+    {
+        $requestAll = $request->request->all();
+        $appointment = $this->appointmentRepository->findOneBy(['id' => $request->get('id')]);
+        $service = $this->servicesRepository->findOneBy(['id' => $request->get('service')]);
+        if ($appointment) {
+            $appointment->setPrice($request->get('appointmentPrice'));
+            $appointment->setTime(new DateTime($request->get('appointmentTime')));
+            $appointment->setStatus($request->get('appointmentStatus'));
+            $appointment->setService($service);
+            $entityManager->persist($appointment);
+            $entityManager->flush();
+        }
+        return new JsonResponse(['success' => true, 'message' => $requestAll]);
     }
 
     #[Route('/appointment_save', name: 'appointment_save')]
@@ -69,6 +89,7 @@ class AppointmentController extends AbstractController
         $appointment->setCreateAt(new DateTime());
         $appointment->setUser($user);
         $appointment->setService($service);
+        $appointment->setPrice($request->get('price'));
         $appointment->setTime(new DateTime($request->get('time')));
         $appointment->setStatus('WAITING');
 

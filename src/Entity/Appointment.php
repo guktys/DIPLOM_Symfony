@@ -18,6 +18,8 @@ class Appointment
 
     #[ORM\ManyToOne(targetEntity: Services::class, inversedBy: 'id')]
     private ?Services $service=null;
+    #[ORM\Column(name: 'price',type: 'string')]
+    private string $price;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'id')]
     private User $user;
@@ -144,4 +146,21 @@ class Appointment
     {
         $this->employer = $employer;
     }
+
+    /**
+     * @return string
+     */
+    public function getPrice(): string
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param string $price
+     */
+    public function setPrice(string $price): void
+    {
+        $this->price = $price;
+    }
+
 }

@@ -41,9 +41,11 @@
                                                     <div class="form-group pb-4">
                                                         <select class="form-select" id="service" name="service"
                                                                 aria-label="Default select example">
-                                                            <option selected >Оберіть послугу</option>
+                                                            <option selected>Оберіть послугу</option>
                                                             {% for service in masterAbilitys %}
-                                                                <option class="{{ service.getCategory }}" cost="{{ service.getPrice }}" value="{{ service.getId }}">
+                                                                <option class="{{ service.getCategory }}"
+                                                                        cost="{{ service.getPrice }}"
+                                                                        value="{{ service.getId }}">
                                                                     {{ service.getName }}
                                                                 </option>
                                                             {% endfor %}
@@ -53,14 +55,15 @@
                                                         <input class="form-control register_input" type="text" id="time"
                                                                placeholder="Дата" name="time" required>
                                                     </div>
-                                                    {% dump consumableItems %}
                                                     {% for key, consumableItem in consumableItems %}
                                                         <div id="const_container_{{ key }}"
                                                              class="const_container form-group pb-4">
                                                             {% for item in consumableItem %}
                                                                 <div class="row">
                                                                     <div class="col text-start">{{ item.getName }}</div>
-                                                                    <div class="col text-end cost">{{ item.getPrice }} грн</div>
+                                                                    <div class="col text-end cost">{{ item.getPrice }}
+                                                                        грн
+                                                                    </div>
                                                                 </div>
                                                             {% endfor %}
                                                             <div id="service_price" class="service_price">
@@ -68,7 +71,9 @@
                                                             <hr>
                                                             <div class="row">
                                                                 <div class="col text-start">Сума</div>
-                                                                <div class="col text-end total_suma"></div>
+                                                                <div class="col text-end total_suma">
+                                                                    <input class="form-control text-end" readonly type="text" name='price'>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     {% endfor %}

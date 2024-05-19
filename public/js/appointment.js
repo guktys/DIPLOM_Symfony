@@ -46,8 +46,10 @@ function checkJQuery() {
             " <div class=\"col text-start\">Послуга</div>\n" +
             " <div class=\"col text-end cost\"> " + cost + " грн</div>\n" +
             " </div>";
-        let costTotalSumaElement = document.querySelector("#const_container_" + selectedServiceClass + ' .total_suma');
-        costTotalSumaElement.innerHTML = totalSuma+" грн";
+        let costTotalSumaElement = document.querySelector("#const_container_" + selectedServiceClass + ' .total_suma' + ' input');
+        console.log("#const_container_" + selectedServiceClass + ' .total_suma' + ' input');
+        console.log(costTotalSumaElement);
+        costTotalSumaElement.value = totalSuma+" грн";
         costBlock.style.display = "block";
     });
 
@@ -63,6 +65,7 @@ function checkJQuery() {
     $('#appointment_form').submit(function (event) {
         event.preventDefault();
         var formData = $(this).serialize();
+        console.log(formData);
         $.ajax({
             type: 'POST',
             url: $(this).attr('action'),

@@ -15,8 +15,6 @@ class LoginLogoutController extends AbstractController
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         return $this->render('login/index.html.twig', [
             'controller_name' => 'LoginLogoutController',
@@ -29,8 +27,6 @@ class LoginLogoutController extends AbstractController
     public function logout(Security $security)
     {
         $response = $security->logout();
-
-        // you can also disable the csrf logout
         $response = $security->logout(false);
     }
 

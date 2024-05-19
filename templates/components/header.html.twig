@@ -30,7 +30,7 @@
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MASTER') %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('master_cabinet') }}">
-                        Кабінет мастера
+                        Кабінет майстра
                     </a></li>
             {% elseif is_granted('ROLE_USER') %}
                 <li class="nav-item">
