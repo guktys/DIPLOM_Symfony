@@ -2,19 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Appointment;
-use App\Entity\AppointmentStatus;
-use App\Entity\User;
-use App\Model\ServicesType;
-use App\Repository\AppointmentRepository;
-use App\Repository\AppointmentStatusRepository;
-use App\Repository\ServicesRepository;
-use App\Repository\UserRepository;
 use App\Service\Appointment\AppointmentHandler;
 use App\Service\Appointment\AppointmentSaveHandler;
 use App\Service\Appointment\AppointmentUpdateHandler;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
