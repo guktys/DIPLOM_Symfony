@@ -42,7 +42,7 @@
                                                         <select class="form-select" id="service" name="service"
                                                                 aria-label="Default select example">
                                                             <option selected>Оберіть послугу</option>
-                                                            {% for service in masterAbilitys %}
+                                                            {% for service in masterAbilities %}
                                                                 <option class="{{ service.getCategory }}"
                                                                         cost="{{ service.getPrice }}"
                                                                         value="{{ service.getId }}">

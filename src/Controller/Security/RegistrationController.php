@@ -3,6 +3,7 @@
 namespace App\Controller\Security;
 
 use App\Entity\User;
+use App\Service\Service\RegistrationHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,38 +15,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegistrationController extends AbstractController
 {
     #[Route('/register_page', name: 'register_page')]
-    public function index()
+    public function index(): Response
     {
-
-        return $this->render('register.html.twig',[
+        return $this->render('register.html.twig', [
         ]);
     }
-    #[Route('/register', name: 'register')]
-    public function register(UserPasswordHasherInterface $passwordHasher,
-                             Request $request, EntityManagerInterface $entityManager)
-    {
-         $user = new User();
-         $user->setEmail($request->get('email'));
-         $user->setFirstname($request->get('firstname'));
-         $user->setLastname($request->get('lastname'));
-         $user->setPhone($request->get('phone'));
-         $user->setUserDetails(null);
-         $user->setRoles((array)'ROLE_USER');
-         $user->setLogo('logo.png');
-         $plaintextPassword = ($request->get('confirm_password'));
-         $hashedPassword = $passwordHasher->hashPassword(
-             $user,
-             $plaintextPassword
-         );
-         $user->setPassword($hashedPassword);
-        $entityManager->persist($user);
-        $entityManager->flush();
 
-        if ($user->getId()) {
-            return new JsonResponse(['success' => true, 'message' => 'Ви успішно зареєстровані!']);
-        } else {
-            return new JsonResponse(['success' => false, 'message' => 'Помилка, спробуйте будь ласка знову пізніше']);
-        }
+    #[Route('/register', name: 'register')]
+    public function register(Request $request, RegistrationHandler $handler): JsonResponse
+    {
+        return $handler($request);
 
     }
 }

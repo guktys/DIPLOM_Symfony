@@ -61,8 +61,8 @@ class UserCabinetController extends AbstractController
             $courses[] = $courseStudent->getKourse();
         }
         $masterDetails = $master->getUserDetails();
-        $masterAbilitys = $masterDetails->getAbilitys();
-        foreach ($masterAbilitys as $masterAbility) {
+        $masterAbilities = $masterDetails->getAbilitys();
+        foreach ($masterAbilities as $masterAbility) {
             $services = $this->servicesRepository->findBy(['category' => $masterAbility, 'type' => ServicesType::SERVICE]);
         }
         $statuses = $this->appointmentStatusRepository->findAll();
