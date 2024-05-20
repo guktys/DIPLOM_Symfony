@@ -14,12 +14,12 @@ final class UserAdmin extends AbstractAdmin
     // добавить нового юзера
     protected function configureFormFields(FormMapper $form): void
     {
-        $form->add('id', TextType::class)
-            ->add('firstName')
-            ->add('lastName')
-            ->add('email')
-            ->add('phone')
-            ->add('logo');
+        // $form->add('id', TextType::class) // Эту строку нужно удалить или закомментировать
+        $form->add('firstName', TextType::class)
+            ->add('lastName', TextType::class)
+            ->add('email', TextType::class)
+            ->add('phone', TextType::class)
+            ->add('logo', TextType::class);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagrid): void
@@ -35,7 +35,7 @@ final class UserAdmin extends AbstractAdmin
    // страница таблицы сущностей
     protected function configureListFields(ListMapper $list): void
     {
-        $list->addIdentifier('id')
+        $list->addIdentifier('id', null, ['editable' => false])
             ->add('firstName')
             ->add('lastName')
             ->add('email')
