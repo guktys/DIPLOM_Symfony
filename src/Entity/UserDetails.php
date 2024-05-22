@@ -25,8 +25,8 @@ class UserDetails
     #[ORM\Column(type:'string', length: 255)]
     private string $profession;
 
-    #[ORM\Column(type:'json', length: 255)]
-    private mixed $abilitys;
+    #[ORM\Column(type: 'json', length: 255, options: ["default" => "{}"])]
+    private mixed $abilitys = [];
 
     #[ORM\Column(type:'string', length: 255)]
     private string $city;
@@ -130,7 +130,7 @@ class UserDetails
     /**
      * @return mixed
      */
-    public function getAbilitys()
+    public function getAbilitys(): mixed
     {
         return $this->abilitys;
     }
@@ -138,10 +138,11 @@ class UserDetails
     /**
      * @param mixed $abilitys
      */
-    public function setAbilitys($abilitys): void
+    public function setAbilitys(mixed $abilitys): void
     {
         $this->abilitys = $abilitys;
     }
+
 
 
 }

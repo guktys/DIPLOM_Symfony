@@ -2,6 +2,7 @@
 
 namespace App\Service\Appointment;
 
+use App\Controller\TelegramBotController;
 use App\Entity\Appointment;
 use App\Repository\AppointmentRepository;
 use App\Repository\AppointmentStatusRepository;
@@ -18,13 +19,15 @@ class AppointmentSaveHandler
     private AppointmentRepository $appointmentRepository;
     private AppointmentStatusRepository $appointmentStatus;
     private EntityManagerInterface $entityManager;
+    private TelegramBotController $telegramBotController;
 
     public function __construct(
         UserRepository              $userRepository,
         ServicesRepository          $servicesRepository,
         AppointmentRepository       $appointmentRepository,
         AppointmentStatusRepository $appointmentStatus,
-        EntityManagerInterface      $entityManager
+        EntityManagerInterface      $entityManager,
+        TelegramBotController       $telegramBotController,
     )
     {
         $this->userRepository = $userRepository;
@@ -32,9 +35,10 @@ class AppointmentSaveHandler
         $this->appointmentRepository = $appointmentRepository;
         $this->appointmentStatus = $appointmentStatus;
         $this->entityManager = $entityManager;
+        $this->telegramBotController = $telegramBotController;
     }
 
-    public function __invoke($request,$user): JsonResponse
+    public function __invoke($request, $user): JsonResponse
     {
         $master = $this->userRepository->findOneBy(['id' => $request->get('master')]);
         $service = $this->servicesRepository->findOneBy(['id' => $request->get('service')]);
@@ -51,6 +55,7 @@ class AppointmentSaveHandler
         $this->entityManager->persist($appointment);
         $this->entityManager->flush();
 
+        $this->telegramBotController->sendAppointmentMessage($appointment, $user, $master);
         if ($appointment->getId()) {
             return new JsonResponse(['success' => true, 'message' => 'Ви успішно записані!']);
         } else {
