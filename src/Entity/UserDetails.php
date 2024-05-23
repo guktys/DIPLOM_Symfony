@@ -16,20 +16,24 @@ class UserDetails
     #[ORM\OneToOne(targetEntity: User::class, inversedBy: "userDetails", cascade: ["persist"])]
     #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", nullable: true)]
     private ?User $user = null;
-    #[ORM\Column(type: 'string', length: 255)]
-    private string $instagram;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $instagram = null;
 
-    #[ORM\Column(type: 'string')]
-    private string $telegram;
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $telegram = null;
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $telegramChatId = null;
+    #[ORM\Column(type: 'boolean')]
+    private bool $telegramAllowSendMessage = false;
 
-    #[ORM\Column(type:'string', length: 255)]
-    private string $profession;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $profession = null;
 
     #[ORM\Column(type: 'json', length: 255, options: ["default" => "{}"])]
     private mixed $abilitys = [];
 
-    #[ORM\Column(type:'string', length: 255)]
-    private string $city;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $city = null;
 
     /**
      * @return int
@@ -143,6 +147,37 @@ class UserDetails
         $this->abilitys = $abilitys;
     }
 
+    /**
+     * @return string
+     */
+    public function getTelegramChatId(): string
+    {
+        return $this->telegramChatId;
+    }
+
+    /**
+     * @param string $telegramChatId
+     */
+    public function setTelegramChatId(string $telegramChatId): void
+    {
+        $this->telegramChatId = $telegramChatId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTelegramAllowSendMessage(): bool
+    {
+        return $this->telegramAllowSendMessage;
+    }
+
+    /**
+     * @param bool $telegramAllowSendMessage
+     */
+    public function setTelegramAllowSendMessage(bool $telegramAllowSendMessage): void
+    {
+        $this->telegramAllowSendMessage = $telegramAllowSendMessage;
+    }
 
 
 }

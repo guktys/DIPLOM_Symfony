@@ -3,6 +3,7 @@ $(document).ready(function () {
     const registerButton = document.querySelector('.register_btn');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm_password');
+    const telegramButtonModal = document.getElementById('telegram_btn_modal');
 
     function validateInput(input, pattern, isOptional = false) {
         const value = input.value.trim();
@@ -12,9 +13,15 @@ $(document).ready(function () {
         if (isValid) {
             input.classList.remove('is-invalid');
             feedbackElement.style.display = 'none';
+            if (input.id === 'telegram') { // Если это поле телеграм и оно валидно
+                telegramButtonModal.style.display = 'block'; // Показываем кнопку
+            }
         } else {
             input.classList.add('is-invalid');
             feedbackElement.style.display = 'block';
+            if (input.id === 'telegram') { // Если это поле телеграм и оно невалидно
+                telegramButtonModal.style.display = 'none'; // Скрываем кнопку
+            }
         }
         checkFormValidity();
     }
@@ -65,8 +72,21 @@ $(document).ready(function () {
                 return /.*/;  // Default pattern (matches any input)
         }
     }
+    $('#telegram_btn_modal').click( function (event) {
+        $.ajax({
+            type: 'GET',
+            url: 'http://diplom/waiting_telegram_chat_id',
+            data: {'userName': 'Abdulalakaka'},
+            success: function (response) {
+                $('#telegramChatId').val(response);
 
-    $('form').submit(function (event) {
+            },
+            error: function (xhr, status, error) {
+            }
+        });
+    });
+
+    $('form_submit_btn').click(function (event) {
         event.preventDefault();
         if (registerButton.disabled) {
             alert('Будь ласка, заповніть всі обов\'язкові поля правильно і переконайтеся, що паролі збігаються перед відправкою.');

@@ -5,7 +5,8 @@ namespace App\Controller;
 use App\Entity\Appointment;
 use App\Entity\User;
 use GuzzleHttp\Client;
-use http\Client\Request;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -50,7 +51,7 @@ class TelegramBotController extends AbstractController
         $token = $this->getParameter('telegram_http_api_token');
         $uri = 'https://api.telegram.org/bot' . $token;
         $uriSendMessage = $uri . '/sendMessage?';
-//        try {
+        try {
             $getQuery = array(
                 "chat_id" => $user->getUserDetails()->getTelegram(),
                 "text" => "<b>Привіт, ви записалися на процедуру!</b> \n <b> Процедура: </b>" . $appointment->getService()->getName() . " \n <b>Час:</b> " . $appointment->getTime()->format('Y-m-d H:i:s') . " \n",
@@ -65,8 +66,52 @@ class TelegramBotController extends AbstractController
                 "parse_mode" => "html",);
             $sendMessage = $this->client->request('GET', $uriSendMessage . http_build_query($getQueryMaster));
             return new Response(json_encode($sendMessage));
-//        } catch (\Exception $e) {
-//            return new Response("Error: " . $e->getMessage());
-//        }
+        } catch (\Exception $e) {
+            return new Response("Error: " . $e->getMessage());
+        }
     }
+    public function sendRegisterMessage(User $user, $chatId)
+    {
+        $token = $this->getParameter('telegram_http_api_token');
+        $uri = 'https://api.telegram.org/bot' . $token;
+        $uriSendMessage = $uri . '/sendMessage?';
+        try {
+            $getQuery = array(
+                "chat_id" => $chatId,
+                "text" => "<b>Привіт,".$user->getFirstname()." ви  успішно зареєстровані!</b> \n",
+                "parse_mode" => "html",);
+            $sendMessage = $this->client->request('GET', $uriSendMessage . http_build_query($getQuery));
+
+        } catch (\Exception $e) {
+        }
+    }
+    #[Route("/waiting_telegram_chat_id", name: "waiting_telegram_chat_id")]
+    public function waitingUserChatId(Request $request)
+    {
+        $client = new Client();
+        $token = $this->getParameter('telegram_http_api_token');
+        $uri = 'https://api.telegram.org/bot' . $token;
+        $uriGetUpdates = $uri . '/getUpdates';
+        $interval = 1;
+        $duration = 360;
+        $userName = $request->get('userName');
+        $endTime = time() + $duration;
+
+        while (time() < $endTime) {
+            try {
+                $response = $this->client->request('GET', $uriGetUpdates);
+                $data = json_decode($response->getBody()->getContents(), true);
+                $last = array_key_last($data['result']);
+                $userNameFromChat = $data['result'][$last]['message']['from']['username'];
+                if ($userNameFromChat == $userName) {
+                    return  new Response($data['result'][$last]['message']['chat']['id']);
+                }
+            } catch (RequestException $e) {
+               return new Response("HTTP Request failed: " . $e->getMessage() . "\n");
+            }
+
+            sleep($interval);
+        }
+    }
+
 }

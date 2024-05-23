@@ -46,11 +46,34 @@
                                                         Ви не правильно ввели дані.
                                                     </div>
                                                 </div>
-                                                <div class="form-group pb-4">
-                                                    <input class="form-control register_input" type="text" id="telegram"
+                                                <input class="form-control register_input " type="text" id="telegramChatId"
+                                                       placeholder=""  name="telegramChatId" required >
+                                                <div class="form-group d-flex row pb-4">
+                                                    <input class="form-control register_input col" type="text" id="telegram"
                                                            placeholder="Ваш telegram"  name="telegram" required>
+
                                                     <div id="validationServer03FeedbackTelegram" class="invalid-feedback">
                                                         Ви не правильно ввели дані.
+                                                    </div>
+                                                    <button id="telegram_btn_modal" class="telegram_btn text-white col telegram_btn_modal"
+                                                            data-bs-toggle="modal" data-bs-target="#madalTelegram">
+                                                        <i class="fa-brands fa-telegram mr-2"></i> Доєднатися до боту
+                                                    </button>
+                                                    <div class="modal fade" id="madalTelegram" tabindex="-1" aria-labelledby="madalTelegram" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Інструкція по доєднаню до бота</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Інфо
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary register_btn" data-bs-dismiss="modal">Закрити</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group pb-4">
@@ -67,7 +90,7 @@
                                                         Ви не правильно ввели дані.
                                                     </div>
                                                 </div>
-                                                <button class="form-control register_btn" type="submit"> Реєстрація</button>
+                                                <button id="form_submit_btn" class="form-control register_btn" type="submit"> Реєстрація</button>
                                             </form>
                                             <div class="alert alert-success" style="display: none" role="alert"></div>
                                             <div class="alert alert-danger" style="display: none" role="alert"></div>

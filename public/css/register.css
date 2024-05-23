@@ -64,7 +64,17 @@ a:hover {
     width: fit-content;
     height: 35px;
     align-items: center;
+    border-radius: 5px;
 }
 .validationServer03FeedbackTelegram{
+    display: none;
+}
+.telegram_btn:hover{
+    background-color: #886d3f;
+    border-color: #886d3f;
+    color: white;
+}
+.telegram_btn_modal{
+    height: 50px;
     display: none;
 }
