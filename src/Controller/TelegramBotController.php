@@ -61,8 +61,8 @@ class TelegramBotController extends AbstractController
             $getQueryMaster = array(
                 "chat_id" => $master->getUserDetails()->getTelegram(),
                 "text" => "<b>Привіт, до вас записалися на процедуру!</b> \n <b> Процедура: </b>" . $appointment->getService()->getName() .
-                 " \n <b>Час:</b> " . $appointment->getTime()->format('Y-m-d H:i:s') . " \n <b> Клієнт:</b> ".
-            $master->getFirstname(). " ". $master->getLastname() . " \n <b>Телефон клієнта:</b> ". $user->getPhone(),
+                    " \n <b>Час:</b> " . $appointment->getTime()->format('Y-m-d H:i:s') . " \n <b> Клієнт:</b> " .
+                    $master->getFirstname() . " " . $master->getLastname() . " \n <b>Телефон клієнта:</b> " . $user->getPhone(),
                 "parse_mode" => "html",);
             $sendMessage = $this->client->request('GET', $uriSendMessage . http_build_query($getQueryMaster));
             return new Response(json_encode($sendMessage));
@@ -70,6 +70,7 @@ class TelegramBotController extends AbstractController
             return new Response("Error: " . $e->getMessage());
         }
     }
+
     public function sendRegisterMessage(User $user, $chatId)
     {
         $token = $this->getParameter('telegram_http_api_token');
@@ -78,13 +79,14 @@ class TelegramBotController extends AbstractController
         try {
             $getQuery = array(
                 "chat_id" => $chatId,
-                "text" => "<b>Привіт,".$user->getFirstname()." ви  успішно зареєстровані!</b> \n",
+                "text" => "<b>Привіт," . $user->getFirstname() . " ви  успішно зареєстровані!</b> \n",
                 "parse_mode" => "html",);
             $sendMessage = $this->client->request('GET', $uriSendMessage . http_build_query($getQuery));
 
         } catch (\Exception $e) {
         }
     }
+
     #[Route("/waiting_telegram_chat_id", name: "waiting_telegram_chat_id")]
     public function waitingUserChatId(Request $request)
     {
@@ -104,10 +106,20 @@ class TelegramBotController extends AbstractController
                 $last = array_key_last($data['result']);
                 $userNameFromChat = $data['result'][$last]['message']['from']['username'];
                 if ($userNameFromChat == $userName) {
-                    return  new Response($data['result'][$last]['message']['chat']['id']);
+                    $uriSendMessage = $uri . '/sendMessage?';
+                    try {
+                        $getQuery = array(
+                            "chat_id" => $data['result'][$last]['message']['chat']['id'],
+                            "text" => "<b>Привіт," . $userNameFromChat . " ваш чат айди успішно встановлено тепер ми можено вам надсилати повідомлення!</b> \n",
+                            "parse_mode" => "html",);
+                        $this->client->request('GET', $uriSendMessage . http_build_query($getQuery));
+
+                    } catch (\Exception $e) {
+                    }
+                    return new Response($data['result'][$last]['message']['chat']['id']);
                 }
             } catch (RequestException $e) {
-               return new Response("HTTP Request failed: " . $e->getMessage() . "\n");
+                return new Response("HTTP Request failed: " . $e->getMessage() . "\n");
             }
 
             sleep($interval);

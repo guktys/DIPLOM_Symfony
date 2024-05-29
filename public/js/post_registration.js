@@ -73,17 +73,20 @@ $(document).ready(function () {
         }
     }
     $('#telegram_btn_modal').click( function (event) {
-        $.ajax({
-            type: 'GET',
-            url: 'http://diplom/waiting_telegram_chat_id',
-            data: {'userName': 'Abdulalakaka'},
-            success: function (response) {
-                $('#telegramChatId').val(response);
+        let telegramUrl = $('#telegram').val();
+        let username = telegramUrl.match(/[^\/]+$/)[0];
 
-            },
-            error: function (xhr, status, error) {
-            }
-        });
+        // $.ajax({
+        //     type: 'GET',
+        //     url: 'http://diplom/waiting_telegram_chat_id',
+        //     data: {'userName': username},
+        //     success: function (response) {
+        //         $('#telegramChatId').val(response);
+        //         $('#chatIdUserFromBot').text("Ваш чат ид: "+response);
+        //     },
+        //     error: function (xhr, status, error) {
+        //     }
+        // });
     });
 
     $('form_submit_btn').click(function (event) {
