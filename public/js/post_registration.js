@@ -76,17 +76,17 @@ $(document).ready(function () {
         let telegramUrl = $('#telegram').val();
         let username = telegramUrl.match(/[^\/]+$/)[0];
 
-        // $.ajax({
-        //     type: 'GET',
-        //     url: 'http://diplom/waiting_telegram_chat_id',
-        //     data: {'userName': username},
-        //     success: function (response) {
-        //         $('#telegramChatId').val(response);
-        //         $('#chatIdUserFromBot').text("Ваш чат ид: "+response);
-        //     },
-        //     error: function (xhr, status, error) {
-        //     }
-        // });
+        $.ajax({
+            type: 'GET',
+            url: 'http://diplom/waiting_telegram_chat_id',
+            data: {'userName': username},
+            success: function (response) {
+                $('#telegramChatId').val(response);
+                $('#chatIdUserFromBot').text("Ваш chat id: "+response);
+            },
+            error: function (xhr, status, error) {
+            }
+        });
     });
 
     $('form_submit_btn').click(function (event) {

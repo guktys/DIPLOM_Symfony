@@ -78,3 +78,9 @@ a:hover {
     height: 50px;
     display: none;
 }
+#madalTelegram .modal-content {
+    width: 39em;
+}
+.instruction_img {
+    width: 154px;
+}

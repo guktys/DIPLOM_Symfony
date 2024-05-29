@@ -66,12 +66,17 @@
                                                                     <h5 class="modal-title" id="exampleModalLabel">Інструкція по доєднаню до бота</h5>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                   <div class="col">
-                                                                       <p>1. Перейдіть до нашого боту</p>
-                                                                   <p id="chatIdUserFromBot"></p>
+                                                                <div class="modal-body d-flex">
+                                                                   <div class="col instruction">
+                                                                       <p>1. Перейдіть до нашого бота:  <a class="form-control telegram_btn text-white" type="submit" href="https://t.me/Golden_Epil_Bot"><i class="fa-brands fa-telegram"> Доєднатися до бота</i></a> </p>
+                                                                       <p>2. Натисніть на кнопку в боті та надішліть будь-яке повідомлення</p>
+                                                                       <p>3. Нижче з'явиться ваш айді, фкщо ми його знайдемо</p>
+                                                                   <p id="chatIdUserFromBot">
+                                                                   </p>
                                                                    </div>
-                                                                    <div class="col"></div>
+                                                                    <div class="col d-flex justify-content-end">
+                                                                        <img class="instruction_img" src="{{ asset('images/register-photo/lvdc.gif') }}">
+                                                                    </div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary register_btn" data-bs-dismiss="modal">Закрити</button>
